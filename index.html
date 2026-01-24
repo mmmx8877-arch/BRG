@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RBG | عروض الصدمة</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Tahoma, Arial;
+  background:#0d0d0d;
+  color:#fff;
+}
+header{
+  text-align:center;
+  padding:20px;
+}
+header img{
+  width:140px;
+  margin-bottom:10px;
+}
+header h1{
+  color:#ff2a2a;
+  margin:5px 0;
+}
+header p{
+  color:#ffc107;
+}
+
+.section{
+  padding:15px;
+}
+.section h2{
+  color:#ff2a2a;
+  margin-bottom:10px;
+}
+
+.card{
+  background:#1a1a1a;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:10px;
+}
+.card h3{
+  margin:0 0 5px;
+  color:#ffc107;
+}
+.card span{
+  color:#00ff99;
+  font-weight:bold;
+}
+
+select, button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+}
+
+select{
+  background:#222;
+  color:#fff;
+}
+
+button{
+  background:#ff2a2a;
+  color:#fff;
+  cursor:pointer;
+}
+
+footer{
+  background:#111;
+  padding:20px;
+  text-align:center;
+}
+footer p{
+  margin:5px 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <!-- اللوجو -->
+  <img src="images/logo.png" alt="RBG Logo">
+  <h1>RBG</h1>
+  <h2> ملوك الجبنة السايحة</h2>
+  <p>🔥 الصدمه وصلت كله يجهز نفسه 🔥</p>
+</header>
+
+<div class="section">
+<h2>🔥 عروض الصدمة</h2>
+
+<div class="card">
+  <h3>الصدمه 1 🫣</h3>
+  <p>سنجل لحمه + سنجل فراخ</p>
+  <span>100 بدل 120</span>
+</div>
+
+<div class="card">
+  <h3>الصدمه 2 😍</h3>
+  <p>2 سنجل دراجون</p>
+  <span>110 بدل 120</span>
+</div>
+
+<div class="card">
+  <h3>الصدمه 3 😜</h3>
+  <p>سنجل لحمه F16 + سنجل بازوكا</p>
+  <span>140</span>
+</div>
+
+<div class="card">
+  <h3>الصدمه 4 🤪</h3>
+  <p>بيف مشروم سنجل + بيف موتزريلا ستيك سنجل</p>
+  <span>120</span>
+</div>
+
+<div class="card">
+  <h3>الصدمه 5 🫣</h3>
+  <p>سنجل تشيكن رانش مشوي + سماش سنجل مشروم</p>
+  <span>150</span>
+</div>
+</div>
+
+<div class="section">
+<h2>🍟 أطباق البطاطس</h2>
+
+<div class="card"><p>بطاطس ساده</p><span>30 جنيه</span></div>
+<div class="card"><p>بطاطس جبنه</p><span>40 جنيه</span></div>
+<div class="card"><p>بطاطس مشكل صوصات</p><span>40 جنيه</span></div>
+<div class="card"><p>بطاطس بسطرمه</p><span>45 جنيه</span></div>
+<div class="card"><p>بطاطس رومي مدخن</p><span>45 جنيه</span></div>
+<div class="card"><p>بطاطس استريبس</p><span>55 جنيه</span></div>
+</div>
+
+<footer>
+<h2>📞 اطلب توصيل</h2>
+
+<select id="branch">
+  <option value="">اختار الفرع</option>
+  <option value="miami">ميامي</option>
+  <option value="sidi">السيوف</option>
+</select>
+
+<button onclick="order()">اطلب الآن واتساب</button>
+
+<p>ميامي: 01284922288</p>
+<p>السيوف: 01222875841</p>
+</footer>
+
+<script>
+function order(){
+  let branch = document.getElementById("branch").value;
+  if(!branch){
+    alert("من فضلك اختار الفرع");
+    return;
+  }
+  let phone = branch === "miami" ? "01222875841" : "01284922288";
+  let msg = encodeURIComponent("السلام عليكم، عايز أطلب عرض من عروض الصدمة 🔥");
+  window.open("https://wa.me/2"+phone+"?text="+msg,"_blank");
+}
+</script>
+
+</body>
+</html>
