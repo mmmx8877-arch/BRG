@@ -3,167 +3,238 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RBG | عروض الصدمة</title>
-
+<title>مطعم RBg</title>
 <style>
-body{
-  margin:0;
-  font-family:Tahoma, Arial;
-  background:#0d0d0d;
-  color:#fff;
+:root{
+  --bg:#0b0f1a; --card:#111827; --muted:#9ca3af;
+  --accent:#ff8a3d; --accent2:#ffb26b; --white:#fff;
+  --radius:16px;
 }
-header{
-  text-align:center;
-  padding:20px;
-}
-header img{
-  width:140px;
-  margin-bottom:10px;
-}
-header h1{
-  color:#ff2a2a;
-  margin:5px 0;
-}
-header p{
-  color:#ffc107;
-}
-
-.section{
-  padding:15px;
-}
-.section h2{
-  color:#ff2a2a;
-  margin-bottom:10px;
-}
-
-.card{
-  background:#1a1a1a;
-  border-radius:12px;
-  padding:15px;
-  margin-bottom:10px;
-}
-.card h3{
-  margin:0 0 5px;
-  color:#ffc107;
-}
-.card span{
-  color:#00ff99;
-  font-weight:bold;
-}
-
-select, button{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border:none;
-  border-radius:8px;
-  font-size:16px;
-}
-
-select{
-  background:#222;
-  color:#fff;
-}
-
-button{
-  background:#ff2a2a;
-  color:#fff;
-  cursor:pointer;
-}
-
-footer{
-  background:#111;
-  padding:20px;
-  text-align:center;
-}
-footer p{
-  margin:5px 0;
-}
+*{box-sizing:border-box;}
+body{margin:0;font-family:Tahoma, Arial;background:linear-gradient(180deg,#05070f,#0b0f1a);color:#fff;}
+header{position:relative;text-align:center;padding:20px 14px 14px;}
+.logo-bg{width:100%;max-width:180px;margin:10px auto;transition:opacity .3s;}
+.logo-bg img{width:100%;opacity:1;}
+.social-icons{margin-top:10px; display:flex; justify-content:center; gap:12px;}
+.social-icons a{display:inline-block; transform:translateY(0);}
+.tabs-wrapper{position:relative;background:#0b0f1a;padding:10px 0;}
+.tabs-wrapper.fixed{position:sticky;top:0;z-index:19;border-bottom:1px solid #111827;}
+.tabs{display:flex;gap:10px;overflow-x:auto;padding:0 10px;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{padding:10px 16px;border-radius:999px;background:#0f172a;border:1px solid #111827;white-space:nowrap;cursor:pointer;}
+.tab.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#111;font-weight:bold;}
+.container{max-width:980px;margin:20px auto;padding:14px;}
+.card{background:linear-gradient(180deg,#0f172a,#020617);border-radius:16px;padding:14px;margin-bottom:14px;border:1px solid #111827;}
+.product{display:grid;grid-template-columns:100px 1fr;gap:14px;}
+.img{width:100px;height:100px;background:#1f2937;border-radius:14px;display:flex;align-items:center;justify-content:center;}
+.row{display:flex;justify-content:space-between;margin-top:10px;align-items:center;}
+.btn{width:36px;height:36px;border:none;border-radius:12px;background:#0f172a;color:#fff;cursor:pointer;}
+.btn.plus{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#111;}
+.toggle-btns{margin-top:8px;display:flex;gap:10px;}
+.toggle-btn{flex:1;padding:6px 0;border-radius:12px;border:none;cursor:pointer;background:#0f172a;color:#fff;}
+.toggle-btn.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#111;font-weight:bold;}
+.footer{position:sticky;bottom:0;background:#020617;padding:14px;}
+.summary{max-width:980px;margin:auto;display:flex;justify-content:space-between;}
+.cta{padding:14px 18px;border-radius:14px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent2));font-weight:bold;}
+#welcome{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:100;}
+#welcome .content{background:#111827;padding:20px;border-radius:16px;text-align:center;}
+#welcome button{margin-top:15px;padding:10px 20px;border:none;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent2));font-weight:bold;}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:200;}
+.modal.active{display:flex;}
+.box{background:#020617;border-radius:16px;padding:20px;max-width:400px;width:90%;}
+.switch{display:flex; gap:10px; margin-bottom:14px;}
+.sw{flex:1;text-align:center;padding:12px;cursor:pointer;border-radius:12px;background:#0f172a;}
+.sw.active{background:linear-gradient(90deg,var(--accent),var(--accent2)); font-weight:bold; color:#111;}
+.field input{width:100%;padding:12px;border-radius:12px;border:none;background:#0f172a;color:#fff;margin-bottom:10px;}
+.actions{display:flex; gap:10px;}
+.ghost{background:#0f172a; color:#fff;}
+.card img{border-radius:12px;}
 </style>
 </head>
-
 <body>
 
 <header>
-  <!-- اللوجو -->
-<img src="https://i.postimg.cc/HkchTdDM/Screenshot-20260124-200715-Whats-App-Business.jpg" alt="لوجو المطعم" class="logo">
-  <h1>RBG</h1>
-  <h2> 🍔ملوك الجبنة السايحة</h2>
-  <p>🔥 🍔الصدمه وصلت كله يجهز نفسه 🔥</p>
+  <div class="logo-bg"><img src="رابط_اللوجو_الشفاف" alt="لوغو المطعم"></div>
+  
+  <!-- أيقونات السوشيال -->
+  <div class="social-icons">
+    <a href="https://wa.me/رقمك" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" width="36"/></a>
+    <a href="https://www.facebook.com/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" width="36"/></a>
+    <a href="https://www.tiktok.com/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" width="36"/></a>
+  </div>
+
+  <div class="tabs-wrapper" id="tabsWrap">
+    <div class="tabs">
+      <div class="tab active" onclick="setCat('سندوتشات')">سندوتشات</div>
+      <div class="tab" onclick="setCat('بطاطس')">بطاطس</div>
+      <div class="tab" onclick="setCat('صوصات')">صوصات</div>
+      <div class="tab" onclick="setCat('عروض')">العروض</div>
+    </div>
+  </div>
 </header>
 
-<div class="section">
-<h2>🔥 عروض الصدمة</h2>
+<div class="container" id="list"></div>
 
-<div class="card">
-  <h3>الصدمه 1 🍔</h3>
-  <p>سنجل لحمه + سنجل فراخ</p>
-  <span>100 بدل 120</span>
+<div class="footer">
+  <div class="summary">
+    <div>الإجمالي: <b id="total">0</b> جنيه</div>
+    <button class="cta" onclick="openConfirm()">تأكيد الطلب</button>
+  </div>
 </div>
 
-<div class="card">
-  <h3>الصدمه 2 😍</h3>
-  <p>2 سنجل دراجون</p>
-  <span>110 بدل 120</span>
+<div id="welcome">
+  <div class="content">
+    ‏مرحبا بك في مطعم RBg 🍔
+    <br>
+    <button onclick="this.parentElement.parentElement.style.display='none'">موافق</button>
+  </div>
 </div>
 
-<div class="card">
-  <h3>الصدمه 3 😜</h3>
-  <p>سنجل لحمه F16 + سنجل بازوكا</p>
-  <span>140</span>
+<div class="modal" id="modal">
+  <div class="box">
+    <h3>تأكيد طلبك</h3>
+    <div class="switch">
+      <div class="sw active" id="swIn" onclick="setMode('in')">استلام من المطعم</div>
+      <div class="sw" id="swOut" onclick="setMode('out')">توصيل</div>
+    </div>
+    <div class="field" id="clientInfo">
+      <input id="clientName" placeholder="الاسم">
+      <input id="clientPhone" placeholder="رقم الهاتف">
+      <input id="clientAddress" placeholder="العنوان">
+    </div>
+    <div class="actions">
+      <button class="cta" onclick="sendWhats()">إرسال الطلب على واتساب</button>
+      <button class="cta ghost" onclick="closeConfirm()">رجوع</button>
+    </div>
+  </div>
 </div>
-
-<div class="card">
-  <h3>الصدمه 4 🤪</h3>
-  <p>بيف مشروم سنجل + بيف موتزريلا ستيك سنجل</p>
-  <span>120</span>
-</div>
-
-<div class="card">
-  <h3>الصدمه 5 🫣</h3>
-  <p>سنجل تشيكن رانش مشوي + سماش سنجل مشروم</p>
-  <span>150</span>
-</div>
-</div>
-
-<div class="section">
-<h2>🍟 أطباق البطاطس</h2>
-
-<div class="card"><p>بطاطس ساده</p><span>30 جنيه</span></div>
-<div class="card"><p>بطاطس جبنه</p><span>40 جنيه</span></div>
-<div class="card"><p>بطاطس مشكل صوصات</p><span>40 جنيه</span></div>
-<div class="card"><p>بطاطس بسطرمه</p><span>45 جنيه</span></div>
-<div class="card"><p>بطاطس رومي مدخن</p><span>45 جنيه</span></div>
-<div class="card"><p>بطاطس استريبس</p><span>55 جنيه</span></div>
-</div>
-
-<footer>
-<h2>📞 اطلب توصيل</h2>
-
-<select id="branch">
-  <option value="">اختار الفرع</option>
-  <option value="miami">ميامي</option>
-  <option value="sidi">السيوف</option>
-</select>
-
-<button onclick="order()">اطلب الآن واتساب</button>
-
-<p>ميامي: 01284922288</p>
-<p>السيوف: 01222875841</p>
-</footer>
 
 <script>
-function order(){
-  let branch = document.getElementById("branch").value;
-  if(!branch){
-    alert("من فضلك اختار الفرع");
-    return;
-  }
-  let phone = branch === "miami" ? "01222875841" : "01284922288";
-  let msg = encodeURIComponent("السلام عليكم، عايز أطلب عرض من عروض الصدمة 🔥");
-  window.open("https://wa.me/2"+phone+"?text="+msg,"_blank");
-}
-</script>
+const WHATSAPP_NUMBER = '+966511868061';
+let currentCat='سندوتشات';
+let order={items:[],total:0};
 
+const products = [
+  // سندوتشات لحم
+  {id:1,cat:'سندوتشات',name:'Classic RBg',priceSingle:50,priceDouble:80,img:'رابط_صورة'},
+  {id:2,cat:'سندوتشات',name:'Big RBg',priceSingle:70,priceDouble:95,img:'رابط_صورة'},
+  {id:3,cat:'سندوتشات',name:'F16 RBg',priceSingle:80,priceDouble:110,img:'رابط_صورة'},
+  {id:4,cat:'سندوتشات',name:'F16 Big RBg',priceSingle:100,priceDouble:125,img:'رابط_صورة'},
+  {id:5,cat:'سندوتشات',name:'F16 Smokey',priceSingle:100,priceDouble:125,img:'رابط_صورة'},
+  {id:6,cat:'سندوتشات',name:'Smash RBg',priceSingle:80,priceDouble:110,img:'رابط_صورة'},
+  {id:7,cat:'سندوتشات',name:'Classic Beef RBg (On Fire)',priceSingle:100,priceDouble:140,img:'رابط_صورة'},
+  {id:8,cat:'سندوتشات',name:'Beef RBg Spicy (On Fire)',priceSingle:100,priceDouble:150,img:'رابط_صورة'},
+  {id:9,cat:'سندوتشات',name:'Beef RBg Mushroom',priceSingle:110,priceDouble:150,img:'رابط_صورة'},
+  {id:10,cat:'سندوتشات',name:'Beef RBg مدخن',priceSingle:110,priceDouble:150,img:'رابط_صورة'},
+  {id:11,cat:'سندوتشات',name:'برجر جمبري',priceSingle:110,priceDouble:null,img:'رابط_صورة'},
+  // سندوتشات دجاج
+  {id:12,cat:'سندوتشات',name:'Classic Chicken',priceSingle:50,priceDouble:80,img:'رابط_صورة'},
+  {id:13,cat:'سندوتشات',name:'Big Chicken',priceSingle:70,priceDouble:100,img:'رابط_صورة'},
+  {id:14,cat:'سندوتشات',name:'F16 Chicken',priceSingle:65,priceDouble:100,img:'رابط_صورة'},
+  {id:15,cat:'سندوتشات',name:'Baazooka Chicken',priceSingle:85,priceDouble:125,img:'رابط_صورة'},
+  {id:16,cat:'سندوتشات',name:'Dragon Chicken',priceSingle:60,priceDouble:85,img:'رابط_صورة'},
+  {id:17,cat:'سندوتشات',name:'Smokey Baazooka',priceSingle:105,priceDouble:125,img:'رابط_صورة'},
+  {id:18,cat:'سندوتشات',name:'RBg Chicken on Fire Ranchy',priceSingle:85,priceDouble:120,img:'رابط_صورة'},
+  {id:19,cat:'سندوتشات',name:'RBg Chicken on Fire Spicy',priceSingle:95,priceDouble:130,img:'رابط_صورة'},
+  // البطاطس
+  {id:20,cat:'بطاطس',name:'بطاطس سادة',priceSingle:35,img:'رابط_صورة'},
+  {id:21,cat:'بطاطس',name:'بطاطس جبنة',priceSingle:45,img:'رابط_صورة'},
+  {id:22,cat:'بطاطس',name:'بطاطس بسطرمة جبنة',priceSingle:50,img:'رابط_صورة'},
+  {id:23,cat:'بطاطس سوسيس جبنة',priceSingle:50,img:'رابط_صورة'},
+  {id:24,cat:'بطاطس فلفل هالبينو باربيكيو',priceSingle:50,img:'رابط_صورة'},
+  {id:25,cat:'بطاطس استربس جبنة',priceSingle:60,img:'رابط_صورة'},
+  // الصوصات
+  {id:26,cat:'صوصات',name:'هالبينو',priceSingle:10,priceDouble:15,img:'رابط_صورة'},
+  {id:27,cat:'صوصات',name:'صوص شيدر',priceSingle:10,priceDouble:25,img:'رابط_صورة'},
+  {id:28,cat:'صوصات',name:'باربيكيو',priceSingle:10,priceDouble:25,img:'رابط_صورة'},
+  {id:29,cat:'صوصات',name:'بيج تيستي',priceSingle:15,priceDouble:25,img:'رابط_صورة'},
+  {id:30,cat:'صوصات',name:'صوص رانش',priceSingle:15,priceDouble:30,img:'رابط_صورة'},
+  // العروض
+  {id:31,cat:'عروض',name:'الصدمه ١ 🫣',priceSingle:100,img:'رابط_صورة'},
+  {id:32,cat:'عروض',name:'الصدمه ٢ 😍',priceSingle:110,img:'رابط_صورة'},
+  {id:33,cat:'عروض',name:'الصدمه ٣ 😜',priceSingle:140,img:'رابط_صورة'},
+  {id:34,cat:'عروض',name:'الصدمه ٤ 🤪',priceSingle:120,img:'رابط_صورة'},
+  {id:35,cat:'عروض',name:'الصدمه ٥ 🫣',priceSingle:150,img:'رابط_صورة'}
+];
+
+const list=document.getElementById('list');
+
+function render(){
+  list.innerHTML='';
+  products.filter(p=>p.cat===currentCat).forEach(p=>{
+    let it=order.items.find(x=>x.id===p.id);
+    if(!it){it={id:p.id,price:p.priceSingle,qty:0,type:'Single'}; order.items.push(it);}
+    list.innerHTML+=`
+      <div class="card">
+        <div class="product">
+          <div class="img"><img src="${p.img}" width="100" height="100"></div>
+          <div>
+            <b>${p.name}</b>
+            ${p.priceDouble !== undefined ? `
+            <div class="toggle-btns">
+              <button class="toggle-btn ${it.type==='Single'?'active':''}" onclick="setType(${p.id},'Single')">Single: ${p.priceSingle}</button>
+              <button class="toggle-btn ${it.type==='Double'?'active':''}" onclick="setType(${p.id},'Double')">Double: ${p.priceDouble}</button>
+            </div>` : ''}
+            <div class="row">
+              <div>${it.price} جنيه</div>
+              <div>
+                <button class="btn" onclick="dec(${p.id})">-</button>
+                ${it.qty}
+                <button class="btn plus" onclick="inc(${p.id})">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  calc();
+}
+
+function setType(id,type){
+  let it=order.items.find(x=>x.id===id);
+  let p=products.find(x=>x.id===id);
+  if(!it) return;
+  it.type=type;
+  it.price = type==='Single'? p.priceSingle : (p.priceDouble??p.priceSingle);
+  render();
+}
+
+function setCat(c){
+  currentCat=c;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelector(`.tab[onclick="setCat('${c}')"]`).classList.add('active');
+  render();
+}
+
+function inc(id){let it=order.items.find(x=>x.id===id); if(!it) return; it.qty++; render();}
+function dec(id){let it=order.items.find(x=>x.id===id); if(!it) return; it.qty--; if(it.qty<=0) order.items=order.items.filter(x=>x.id!==id); render();}
+function calc(){document.getElementById('total').innerText=order.items.reduce((s,i)=>s+i.price*i.qty,0);}
+function openConfirm(){document.getElementById('modal').classList.add('active');}
+function closeConfirm(){document.getElementById('modal').classList.remove('active');}
+
+function setMode(m){
+  document.getElementById('swIn').classList.toggle('active', m==='in');
+  document.getElementById('swOut').classList.toggle('active', m==='out');
+}
+
+function sendWhats(){
+  const selectedItems = order.items.filter(i=>i.qty>0);
+  if(selectedItems.length===0){alert('اختَر منتجات أولاً');return;}
+  const name=document.getElementById('clientName').value||'غير محدد';
+  const phone=document.getElementById('clientPhone').value||'غير محدد';
+  const address=document.getElementById('clientAddress').value||'غير محدد';
+  let msg=`طلب جديد:%0A`;
+  selectedItems.forEach(i=>{
+    msg+=`- ${products.find(p=>p.id===i.id).name} (${i.type}) × ${i.qty} = ${i.price*i.qty} جنيه%0A`;
+  });
+  msg+=`%0Aالإجمالي: ${selectedItems.reduce((s,i)=>s+i.price*i.qty,0)} جنيه`;
+  msg+=`%0Aالاسم: ${name}%0Aرقم الهاتف: ${phone}%0Aالعنوان: ${address}`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`,'_blank');
+  closeConfirm();
+}
+
+render();
+</script>
 </body>
-</html>
+  </html>
