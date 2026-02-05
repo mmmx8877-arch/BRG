@@ -6,235 +6,528 @@
 <title>مطعم RBg</title>
 <style>
 :root{
-  --bg:#0b0f1a; --card:#111827; --muted:#9ca3af;
-  --accent:#ff8a3d; --accent2:#ffb26b; --white:#fff;
-  --radius:16px;
+  --accent:#ff8a3d;
+  --accent2:#ffb26b;
 }
-*{box-sizing:border-box;}
-body{margin:0;font-family:Tahoma, Arial;background:linear-gradient(180deg,#05070f,#0b0f1a);color:#fff;}
-header{position:relative;text-align:center;padding:20px 14px 14px;}
-.logo-bg{width:100%;max-width:180px;margin:10px auto;transition:opacity .3s;}
-.logo-bg img{width:100%;opacity:1;}
-.social-icons{margin-top:10px; display:flex; justify-content:center; gap:12px;}
-.social-icons a{display:inline-block; transform:translateY(0);}
-.tabs-wrapper{position:relative;background:#0b0f1a;padding:10px 0;}
-.tabs-wrapper.fixed{position:sticky;top:0;z-index:19;border-bottom:1px solid #111827;}
-.tabs{display:flex;gap:10px;overflow-x:auto;padding:0 10px;}
-.tabs::-webkit-scrollbar{display:none;}
-.tab{padding:10px 16px;border-radius:999px;background:#0f172a;border:1px solid #111827;white-space:nowrap;cursor:pointer;}
-.tab.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#111;font-weight:bold;}
-.container{max-width:980px;margin:20px auto;padding:14px;}
-.card{background:linear-gradient(180deg,#0f172a,#020617);border-radius:16px;padding:14px;margin-bottom:14px;border:1px solid #111827;}
-.product{display:grid;grid-template-columns:100px 1fr;gap:14px;}
-.img{width:100px;height:100px;background:#1f2937;border-radius:14px;display:flex;align-items:center;justify-content:center;}
-.row{display:flex;justify-content:space-between;margin-top:10px;align-items:center;}
-.btn{width:36px;height:36px;border:none;border-radius:12px;background:#0f172a;color:#fff;cursor:pointer;}
-.btn.plus{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#111;}
-.toggle-btns{margin-top:8px;display:flex;gap:10px;}
-.toggle-btn{flex:1;padding:6px 0;border-radius:12px;border:none;cursor:pointer;background:#0f172a;color:#fff;}
-.toggle-btn.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#111;font-weight:bold;}
-.footer{position:sticky;bottom:0;background:#020617;padding:14px;}
-.summary{max-width:980px;margin:auto;display:flex;justify-content:space-between;}
-.cta{padding:14px 18px;border-radius:14px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent2));font-weight:bold;}
-#welcome{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:100;}
-#welcome .content{background:#111827;padding:20px;border-radius:16px;text-align:center;}
-#welcome button{margin-top:15px;padding:10px 20px;border:none;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent2));font-weight:bold;}
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:200;}
-.modal.active{display:flex;}
-.box{background:#020617;border-radius:16px;padding:20px;max-width:400px;width:90%;}
-.switch{display:flex; gap:10px; margin-bottom:14px;}
-.sw{flex:1;text-align:center;padding:12px;cursor:pointer;border-radius:12px;background:#0f172a;}
-.sw.active{background:linear-gradient(90deg,var(--accent),var(--accent2)); font-weight:bold; color:#111;}
-.field input{width:100%;padding:12px;border-radius:12px;border:none;background:#0f172a;color:#fff;margin-bottom:10px;}
-.actions{display:flex; gap:10px;}
-.ghost{background:#0f172a; color:#fff;}
-.card img{border-radius:12px;}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Tahoma,Arial;
+  background:#0b0f1a;
+  color:#fff;
+}
+
+/* HEADER */
+header{text-align:center;padding:15px}
+.logo img{max-width:160px}
+.social{display:flex;justify-content:center;gap:12px;margin:10px 0}
+.social img{width:34px}
+
+/* TABS */
+.tabs{display:flex;gap:8px;overflow-x:auto}
+.tab{
+  padding:10px 14px;
+  background:#0f172a;
+  border-radius:20px;
+  cursor:pointer;
+  white-space:nowrap
+}
+.tab.active{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#000;
+  font-weight:bold
+}
+
+/* CONTENT */
+.container{padding:15px}
+.card{
+  background:#111827;
+  border-radius:14px;
+  padding:10px;
+  margin-bottom:10px
+}
+.item{
+  display:grid;
+  grid-template-columns:90px 1fr;
+  gap:10px
+}
+.item img{
+  width:90px;
+  height:90px;
+  border-radius:12px;
+  object-fit:cover
+}
+
+/* OPTIONS */
+.toggle{display:flex;gap:6px;margin:6px 0}
+.toggle button{
+  flex:1;
+  padding:6px;
+  border-radius:10px;
+  background:#0f172a;
+  color:#fff;
+  border:none
+}
+.toggle button.active{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#000
+}
+
+/* QTY */
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+.qty button{
+  width:32px;
+  height:32px;
+  border-radius:10px;
+  border:none;
+  background:#0f172a;
+  color:#fff
+}
+.qty .plus{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#000
+}
+
+/* FOOTER */
+footer{
+  position:sticky;
+  bottom:0;
+  background:#020617;
+  padding:12px
+}
+footer div{
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+footer button{
+  padding:10px 16px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  font-weight:bold
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center
+}
+.modal.active{display:flex}
+.box{
+  background:#020617;
+  padding:20px;
+  border-radius:16px;
+  width:90%;
+  max-width:400px
+}
+.switch{display:flex;gap:10px;margin-bottom:10px}
+.switch div{
+  flex:1;
+  padding:10px;
+  background:#0f172a;
+  border-radius:12px;
+  text-align:center;
+  cursor:pointer
+}
+.switch .active{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#000;
+  font-weight:bold
+}
+.box input{
+  width:100%;
+  padding:10px;
+  margin-bottom:8px;
+  border-radius:12px;
+  border:none;
+  background:#0f172a;
+  color:#fff
+}
+#address{display:none}
+
+/* رسالة الطلب الكبيرة */
+.msg-preview{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  padding:10px;
+  border-radius:12px;
+  margin-bottom:8px;
+  font-size:16px;
+  color:#000;
+  white-space:pre-line;
+}
+
+/* مودال الترحيب */
+#welcomeModal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+#welcomeBox{
+  background:#111827;
+  padding:20px;
+  border-radius:16px;
+  text-align:center;
+  max-width:350px;
+}
+#welcomeBox button{
+  margin-top:15px;
+  padding:10px 16px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  font-weight:bold;
+  cursor:pointer;
+}
 </style>
 </head>
 <body>
 
+<!-- مودال الترحيب -->
+<div id="welcomeModal">
+  <div id="welcomeBox">
+    <h2>أهلاً بك في مطعم RBg 🍔</h2>
+    <p>اختر ما تريد من قائمة السندوتشات، البطاطس، الصوصات أو العروض!</p>
+    <button onclick="closeWelcome()">الغاء</button>
+  </div>
+</div>
+
 <header>
-  <div class="logo-bg"><img src="رابط_اللوجو_الشفاف" alt="لوغو المطعم"></div>
-  
-  <!-- أيقونات السوشيال -->
-  <div class="social-icons">
-    <a href="https://wa.me/رقمك" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" width="36"/></a>
-    <a href="https://www.facebook.com/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" width="36"/></a>
-    <a href="https://www.tiktok.com/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" width="36"/></a>
+  <div class="logo">
+    <img src="https://postimg.cc/GTkB8DGP">
   </div>
 
-  <div class="tabs-wrapper" id="tabsWrap">
-    <div class="tabs">
-      <div class="tab active" onclick="setCat('سندوتشات')">سندوتشات</div>
-      <div class="tab" onclick="setCat('بطاطس')">بطاطس</div>
-      <div class="tab" onclick="setCat('صوصات')">صوصات</div>
-      <div class="tab" onclick="setCat('عروض')">العروض</div>
-    </div>
+
+
+
+
+
+
+
+
+  <div class="social">
+  <a href="https://wa.me/01284922288" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" class="social-icon anim-up">
+  </a>
+  <a href="https://www.facebook.com/" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" class="social-icon anim-down">
+  </a>
+ <a href="https://www.tiktok.com/" target="_blank">
+  <img src="https://i.postimg.cc/0NV9Ytjy/Messenger-creation-D817A9D0-2F3A-41AB-95C6-810670EFA099.gif" class="social-icon anim-up" style="width:34px;height:34px;">
+</a>
+</div>
+
+<style>
+.social-icon{
+  width:40px;
+  height:40px;
+  display:inline-block;
+  margin:0 5px;
+}
+
+/* حركة للأيقونة تطلع */
+@keyframes moveUpDown {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-15px); opacity: 0.6; }
+}
+
+/* حركة للأيقونة تنزل */
+@keyframes moveDownUp {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(15px); opacity: 0.6; }
+}
+
+.anim-up{
+  animation: moveUpDown 2s ease-in-out infinite;
+}
+
+.anim-down{
+  animation: moveDownUp 2s ease-in-out infinite;
+}
+</style>
+
+
+
+
+
+
+
+
+
+  <div class="tabs">
+    <div class="tab active" onclick="setCat('سندوتشات',this)">سندوتشات</div>
+    <div class="tab" onclick="setCat('بطاطس',this)">بطاطس</div>
+    <div class="tab" onclick="setCat('صوصات',this)">صوصات</div>
+    <div class="tab" onclick="setCat('عروض',this)">العروض</div>
   </div>
 </header>
 
 <div class="container" id="list"></div>
 
-<div class="footer">
-  <div class="summary">
-    <div>الإجمالي: <b id="total">0</b> جنيه</div>
-    <button class="cta" onclick="openConfirm()">تأكيد الطلب</button>
+<footer>
+  <div>
+    <span>الإجمالي: <b id="total">0</b> جنيه</span>
+    <button onclick="openModal()">تأكيد الطلب</button>
   </div>
-</div>
+</footer>
 
-<div id="welcome">
-  <div class="content">
-    ‏مرحبا بك في مطعم RBg 🍔
-    <br>
-    <button onclick="this.parentElement.parentElement.style.display='none'">موافق</button>
-  </div>
-</div>
 
+
+
+
+
+<!-- MODAL -->
+<!-- MODAL -->
 <div class="modal" id="modal">
   <div class="box">
-    <h3>تأكيد طلبك</h3>
     <div class="switch">
-      <div class="sw active" id="swIn" onclick="setMode('in')">استلام من المطعم</div>
-      <div class="sw" id="swOut" onclick="setMode('out')">توصيل</div>
+      <div id="inBtn" class="active" onclick="setMode('in')">استلام</div>
+      <div id="outBtn" onclick="setMode('out')">توصيل</div>
     </div>
-    <div class="field" id="clientInfo">
-      <input id="clientName" placeholder="الاسم">
-      <input id="clientPhone" placeholder="رقم الهاتف">
-      <input id="clientAddress" placeholder="العنوان">
-    </div>
-    <div class="actions">
-      <button class="cta" onclick="sendWhats()">إرسال الطلب على واتساب</button>
-      <button class="cta ghost" onclick="closeConfirm()">رجوع</button>
-    </div>
+
+    <input id="name" placeholder="الاسم">
+    <input id="phone" placeholder="رقم الهاتف">
+    <input id="address" placeholder="العنوان">
+
+    <div class="msg-preview" id="msgPreview">رسالة الطلب ستظهر هنا...</div>
+
+
+
+
+<button id="locationBtn" style="width:100%;margin-bottom:8px;
+background:linear-gradient(90deg,var(--accent),var(--accent2));
+border:none;border-radius:14px;padding:12px;font-weight:bold;cursor:pointer;">
+📍 تحديد موقعي الحالي
+</button>
+
+
+
+
+
+
+    <!-- زر إرسال واتساب أكبر وجذاب -->
+    <button style="
+      width:100%;
+      margin-bottom:10px;
+      padding:14px;
+      font-size:18px;
+      font-weight:bold;
+      border:none;
+      border-radius:16px;
+      background:linear-gradient(90deg,#25D366,#128C7E);
+      color:#fff;
+      cursor:pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    " onclick="sendWhats()">إرسال واتساب</button>
+
+    <!-- زر إلغاء الطلب أكبر وأجمل -->
+    <button style="
+      width:100%;
+      padding:14px;
+      font-size:18px;
+      font-weight:bold;
+      border:none;
+      border-radius:16px;
+      background:#ff4d4d;
+      color:#fff;
+      cursor:pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    " onclick="modal.classList.remove('active')">إلغاء الطلب</button>
   </div>
 </div>
 
-<script>
-const WHATSAPP_NUMBER = '+966511868061';
-let currentCat='سندوتشات';
-let order={items:[],total:0};
 
-const products = [
-  // سندوتشات لحم
-  {id:1,cat:'سندوتشات',name:'Classic RBg',priceSingle:50,priceDouble:80,img:'رابط_صورة'},
-  {id:2,cat:'سندوتشات',name:'Big RBg',priceSingle:70,priceDouble:95,img:'رابط_صورة'},
-  {id:3,cat:'سندوتشات',name:'F16 RBg',priceSingle:80,priceDouble:110,img:'رابط_صورة'},
-  {id:4,cat:'سندوتشات',name:'F16 Big RBg',priceSingle:100,priceDouble:125,img:'رابط_صورة'},
-  {id:5,cat:'سندوتشات',name:'F16 Smokey',priceSingle:100,priceDouble:125,img:'رابط_صورة'},
-  {id:6,cat:'سندوتشات',name:'Smash RBg',priceSingle:80,priceDouble:110,img:'رابط_صورة'},
-  {id:7,cat:'سندوتشات',name:'Classic Beef RBg (On Fire)',priceSingle:100,priceDouble:140,img:'رابط_صورة'},
-  {id:8,cat:'سندوتشات',name:'Beef RBg Spicy (On Fire)',priceSingle:100,priceDouble:150,img:'رابط_صورة'},
-  {id:9,cat:'سندوتشات',name:'Beef RBg Mushroom',priceSingle:110,priceDouble:150,img:'رابط_صورة'},
-  {id:10,cat:'سندوتشات',name:'Beef RBg مدخن',priceSingle:110,priceDouble:150,img:'رابط_صورة'},
-  {id:11,cat:'سندوتشات',name:'برجر جمبري',priceSingle:110,priceDouble:null,img:'رابط_صورة'},
-  // سندوتشات دجاج
-  {id:12,cat:'سندوتشات',name:'Classic Chicken',priceSingle:50,priceDouble:80,img:'رابط_صورة'},
-  {id:13,cat:'سندوتشات',name:'Big Chicken',priceSingle:70,priceDouble:100,img:'رابط_صورة'},
-  {id:14,cat:'سندوتشات',name:'F16 Chicken',priceSingle:65,priceDouble:100,img:'رابط_صورة'},
-  {id:15,cat:'سندوتشات',name:'Baazooka Chicken',priceSingle:85,priceDouble:125,img:'رابط_صورة'},
-  {id:16,cat:'سندوتشات',name:'Dragon Chicken',priceSingle:60,priceDouble:85,img:'رابط_صورة'},
-  {id:17,cat:'سندوتشات',name:'Smokey Baazooka',priceSingle:105,priceDouble:125,img:'رابط_صورة'},
-  {id:18,cat:'سندوتشات',name:'RBg Chicken on Fire Ranchy',priceSingle:85,priceDouble:120,img:'رابط_صورة'},
-  {id:19,cat:'سندوتشات',name:'RBg Chicken on Fire Spicy',priceSingle:95,priceDouble:130,img:'رابط_صورة'},
-  // البطاطس
-  {id:20,cat:'بطاطس',name:'بطاطس سادة',priceSingle:35,img:'رابط_صورة'},
-  {id:21,cat:'بطاطس',name:'بطاطس جبنة',priceSingle:45,img:'رابط_صورة'},
-  {id:22,cat:'بطاطس',name:'بطاطس بسطرمة جبنة',priceSingle:50,img:'رابط_صورة'},
-  {id:23,cat:'بطاطس سوسيس جبنة',priceSingle:50,img:'رابط_صورة'},
-  {id:24,cat:'بطاطس فلفل هالبينو باربيكيو',priceSingle:50,img:'رابط_صورة'},
-  {id:25,cat:'بطاطس استربس جبنة',priceSingle:60,img:'رابط_صورة'},
-  // الصوصات
-  {id:26,cat:'صوصات',name:'هالبينو',priceSingle:10,priceDouble:15,img:'رابط_صورة'},
-  {id:27,cat:'صوصات',name:'صوص شيدر',priceSingle:10,priceDouble:25,img:'رابط_صورة'},
-  {id:28,cat:'صوصات',name:'باربيكيو',priceSingle:10,priceDouble:25,img:'رابط_صورة'},
-  {id:29,cat:'صوصات',name:'بيج تيستي',priceSingle:15,priceDouble:25,img:'رابط_صورة'},
-  {id:30,cat:'صوصات',name:'صوص رانش',priceSingle:15,priceDouble:30,img:'رابط_صورة'},
-  // العروض
-  {id:31,cat:'عروض',name:'الصدمه ١ 🫣',priceSingle:100,img:'رابط_صورة'},
-  {id:32,cat:'عروض',name:'الصدمه ٢ 😍',priceSingle:110,img:'رابط_صورة'},
-  {id:33,cat:'عروض',name:'الصدمه ٣ 😜',priceSingle:140,img:'رابط_صورة'},
-  {id:34,cat:'عروض',name:'الصدمه ٤ 🤪',priceSingle:120,img:'رابط_صورة'},
-  {id:35,cat:'عروض',name:'الصدمه ٥ 🫣',priceSingle:150,img:'رابط_صورة'}
+
+
+
+<script>
+document.getElementById('locationBtn').onclick = function () {
+  if (!navigator.geolocation) {
+    alert('المتصفح لا يدعم تحديد الموقع');
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    function (pos) {
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+
+      const mapLink = `https://www.google.com/maps?q=${lat},${lng}`;
+
+      // يحط الرابط في العنوان
+      address.value = mapLink;
+
+      // يفتح الخريطة فورًا
+      window.open(mapLink, '_blank');
+
+      updateMsgPreview();
+    },
+    function () {
+      alert('من فضلك فعّل GPS واسمح بالموقع');
+    }
+  );
+};
+
+</script>
+
+
+
+
+
+
+
+<script>
+const WHATSAPP="+201284922288";
+let cat='سندوتشات';
+let mode='in';
+let cart=[];
+
+/* البيانات كاملة لكل الأصناف مع الصور الحقيقية */
+const items=[
+ {id:1,cat:'سندوتشات',name:'Classic RBg',s:50,d:80,img:'https://postimg.cc/tYYtTSmK'},
+ {id:2,cat:'سندوتشات',name:'Big RBg',s:80,d:110,img:'https://postimg.cc/rzhNqXgK'},
+ {id:3,cat:'سندوتشات',name:'F16 RBg',s:100,d:125,img:'https://postimg.cc/kRV6nZXp'},
+ {id:4,cat:'سندوتشات',name:'F16 Big RBg',s:100,d:140,img:'https://postimg.cc/HrFSdDY0'},
+ {id:5,cat:'سندوتشات',name:'F16 Smokey',s:110,d:150,img:'رابط_صورة'},
+ {id:6,cat:'سندوتشات',name:'Smash RBg',s:100,d:125,img:'https://postimg.cc/1gPqpJJw'},
+ {id:7,cat:'سندوتشات',name:'Classic Beef RBg (On Fire)',s:60,d:85,img:'https://postimg.cc/zHYpWnb0'},
+ {id:8,cat:'سندوتشات',name:'Beef RBg Spicy (On Fire)',s:65,d:100,img:'https://postimg.cc/m14NhBJ1'},
+ {id:9,cat:'سندوتشات',name:'Beef RBg Mushroom',s:95,d:130,img:'https://postimg.cc/HrFSdDY0'},
+ {id:10,cat:'سندوتشات',name:'Beef RBg مدخن',s:70,d:100,img:'https://postimg.cc/xqPFH458'},
+ {id:11,cat:'سندوتشات',name:'Classic Chicken',s:85,d:120,img:'https://postimg.cc/Z0z163h8'},
+ {id:12,cat:'سندوتشات',name:'Big Chicken',s:70,d:100,img:'رابط_صورة'},
+ {id:13,cat:'سندوتشات',name:'F16 Chicken',s:65,d:100,img:'رابط_صورة'},
+ {id:14,cat:'سندوتشات',name:'Baazooka Chicken',s:85,d:125,img:'رابط_صورة'},
+ {id:15,cat:'سندوتشات',name:'Dragon Chicken',s:60,d:85,img:'رابط_صورة'},
+ {id:16,cat:'سندوتشات',name:'Smokey Baazooka',s:105,d:125,img:'رابط_صورة'},
+ {id:17,cat:'سندوتشات',name:'RBg Chicken on Fire Ranchy',s:85,d:120,img:'رابط_صورة'},
+ {id:18,cat:'سندوتشات',name:'RBg Chicken on Fire Spicy',s:95,d:130,img:'رابط_صورة'},
+ // البطاطس
+ {id:20,cat:'بطاطس',name:'بطاطس سادة',s:35,img:'https://postimg.cc/3yMZzX1z'},
+ {id:21,cat:'بطاطس',name:'بطاطس جبنة',s:45,img:'https://postimg.cc/K13N9qP1'},
+ {id:22,cat:'بطاطس',name:'بطاطس بسطرمة جبنة',s:50,img:'رابط_صورة'},
+ {id:23,cat:'بطاطس',name:'بطاطس سوسيس جبنة',s:50,img:'رابط_صورة'},
+ {id:24,cat:'بطاطس',name:'بطاطس فلفل هالبينو باربيكيو',s:50,img:'https://postimg.cc/hzc1tKHr'},
+ {id:25,cat:'بطاطس',name:'بطاطس استربس جبنة',s:60,img:'https://postimg.cc/rRpG5QyG'},
+ // الصوصات
+ {id:26,cat:'صوصات',name:'هالبينو',s:10,d:15,img:'رابط_صورة'},
+ {id:27,cat:'صوصات',name:'صوص شيدر',s:10,d:25,img:'رابط_صورة'},
+ {id:28,cat:'صوصات',name:'باربيكيو',s:10,d:25,img:'رابط_صورة'},
+ {id:29,cat:'صوصات',name:'بيج تيستي',s:15,d:25,img:'رابط_صورة'},
+ {id:30,cat:'صوصات',name:'صوص رانش',s:15,d:30,img:'رابط_صورة'},
+ // العروض
+ {id:31,cat:'عروض',name:'الصدمه ١ 🫣',s:100,img:'رابط_صورة'},
+ {id:32,cat:'عروض',name:'الصدمه ٢ 😍',s:110,img:'رابط_صورة'},
+ {id:33,cat:'عروض',name:'الصدمه ٣ 😜',s:140,img:'رابط_صورة'},
+ {id:34,cat:'عروض',name:'الصدمه ٤ 🤪',s:120,img:'رابط_صورة'},
+ {id:35,cat:'عروض',name:'الصدمه ٥ 🫣',s:150,img:'رابط_صورة'}
 ];
 
-const list=document.getElementById('list');
+function setCat(c,e){
+ cat=c;
+ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+ e.classList.add('active');
+ render();
+}
 
 function render(){
-  list.innerHTML='';
-  products.filter(p=>p.cat===currentCat).forEach(p=>{
-    let it=order.items.find(x=>x.id===p.id);
-    if(!it){it={id:p.id,price:p.priceSingle,qty:0,type:'Single'}; order.items.push(it);}
-    list.innerHTML+=`
-      <div class="card">
-        <div class="product">
-          <div class="img"><img src="${p.img}" width="100" height="100"></div>
-          <div>
-            <b>${p.name}</b>
-            ${p.priceDouble !== undefined ? `
-            <div class="toggle-btns">
-              <button class="toggle-btn ${it.type==='Single'?'active':''}" onclick="setType(${p.id},'Single')">Single: ${p.priceSingle}</button>
-              <button class="toggle-btn ${it.type==='Double'?'active':''}" onclick="setType(${p.id},'Double')">Double: ${p.priceDouble}</button>
-            </div>` : ''}
-            <div class="row">
-              <div>${it.price} جنيه</div>
-              <div>
-                <button class="btn" onclick="dec(${p.id})">-</button>
-                ${it.qty}
-                <button class="btn plus" onclick="inc(${p.id})">+</button>
-              </div>
-            </div>
+ const list=document.getElementById('list');
+ list.innerHTML='';
+ items.filter(i=>i.cat===cat).forEach(p=>{
+  let it=cart.find(x=>x.id===p.id);
+  if(!it){it={id:p.id,qty:0,type:'s',price:p.s};cart.push(it);}
+  list.innerHTML+=`
+  <div class="card">
+    <div class="item">
+      <img src="${p.img}">
+      <div>
+        <b>${p.name}</b>
+        ${p.d?`
+        <div class="toggle">
+          <button class="${it.type=='s'?'active':''}" onclick="setType(${p.id},'s')">سنجل: ${p.s}</button>
+          <button class="${it.type=='d'?'active':''}" onclick="setType(${p.id},'d')">دبل: ${p.d}</button>
+        </div>`:''}
+        <div class="row">
+          <span>${it.price} جنيه</span>
+          <div class="qty">
+            <button onclick="chg(${p.id},-1)">-</button>
+            ${it.qty}
+            <button class="plus" onclick="chg(${p.id},1)">+</button>
           </div>
         </div>
       </div>
-    `;
-  });
-  calc();
+    </div>
+  </div>`;
+ });
+ calc();
 }
 
-function setType(id,type){
-  let it=order.items.find(x=>x.id===id);
-  let p=products.find(x=>x.id===id);
-  if(!it) return;
-  it.type=type;
-  it.price = type==='Single'? p.priceSingle : (p.priceDouble??p.priceSingle);
-  render();
+function setType(id,t){
+ let it=cart.find(i=>i.id===id);
+ let p=items.find(i=>i.id===id);
+ it.type=t;
+ it.price=t=='s'?p.s:p.d;
+ render();
 }
 
-function setCat(c){
-  currentCat=c;
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelector(`.tab[onclick="setCat('${c}')"]`).classList.add('active');
-  render();
+function chg(id,n){
+ let it=cart.find(i=>i.id===id);
+ it.qty=Math.max(0,it.qty+n);
+ render();
 }
 
-function inc(id){let it=order.items.find(x=>x.id===id); if(!it) return; it.qty++; render();}
-function dec(id){let it=order.items.find(x=>x.id===id); if(!it) return; it.qty--; if(it.qty<=0) order.items=order.items.filter(x=>x.id!==id); render();}
-function calc(){document.getElementById('total').innerText=order.items.reduce((s,i)=>s+i.price*i.qty,0);}
-function openConfirm(){document.getElementById('modal').classList.add('active');}
-function closeConfirm(){document.getElementById('modal').classList.remove('active');}
+function calc(){
+ let totalVal=cart.reduce((s,i)=>s+i.qty*i.price,0);
+ document.getElementById('total').innerText=totalVal;
+ updateMsgPreview();
+}
 
+function openModal(){modal.classList.add('active')}
 function setMode(m){
-  document.getElementById('swIn').classList.toggle('active', m==='in');
-  document.getElementById('swOut').classList.toggle('active', m==='out');
+ mode=m;
+ inBtn.classList.toggle('active',m=='in');
+ outBtn.classList.toggle('active',m=='out');
+ address.style.display=m=='out'?'block':'none';
+ if(m=='in')address.value='';
+}
+
+function updateMsgPreview(){
+ let msg='طلب جديد:\n';
+ cart.filter(i=>i.qty>0).forEach(i=>{
+  let p=items.find(x=>x.id===i.id);
+  msg+=`- ${p.name} (${i.type=='s'?'سنجل':'دبل'}) × ${i.qty} = ${i.price*i.qty} جنيه\n`;
+ });
+ msg+=`الإجمالي: ${total.innerText} جنيه\n`;
+ msg+=`الاسم: ${name.value || 'غير محدد'}\nرقم الهاتف: ${phone.value || 'غير محدد'}`;
+ if(mode=='out') msg+=`\nالعنوان: ${address.value || 'غير محدد'}`;
+ document.getElementById('msgPreview').innerText=msg;
 }
 
 function sendWhats(){
-  const selectedItems = order.items.filter(i=>i.qty>0);
-  if(selectedItems.length===0){alert('اختَر منتجات أولاً');return;}
-  const name=document.getElementById('clientName').value||'غير محدد';
-  const phone=document.getElementById('clientPhone').value||'غير محدد';
-  const address=document.getElementById('clientAddress').value||'غير محدد';
-  let msg=`طلب جديد:%0A`;
-  selectedItems.forEach(i=>{
-    msg+=`- ${products.find(p=>p.id===i.id).name} (${i.type}) × ${i.qty} = ${i.price*i.qty} جنيه%0A`;
-  });
-  msg+=`%0Aالإجمالي: ${selectedItems.reduce((s,i)=>s+i.price*i.qty,0)} جنيه`;
-  msg+=`%0Aالاسم: ${name}%0Aرقم الهاتف: ${phone}%0Aالعنوان: ${address}`;
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`,'_blank');
-  closeConfirm();
+ updateMsgPreview();
+ let text=encodeURIComponent(document.getElementById('msgPreview').innerText);
+ window.open(`https://wa.me/${WHATSAPP}?text=${text}`);
+}
+
+/* الترحيب */
+function closeWelcome(){
+ document.getElementById('welcomeModal').style.display='none';
 }
 
 render();
 </script>
+
 </body>
   </html>
