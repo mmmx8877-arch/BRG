@@ -191,6 +191,51 @@ footer button{
   font-weight:bold;
   cursor:pointer;
 }
+
+
+.branch-switch button{
+  flex:1;
+  padding:10px;
+  border-radius:12px;
+  border:none;
+  background:#0f172a; /* نفس لون باقي الأزرار */
+  color:#fff;
+  cursor:pointer;
+  font-weight:bold;
+  transition: all 0.3s;
+}
+
+.branch-switch button.active{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#000;
+}
+
+
+
+
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.item {
+  animation: slideDown 0.5s ease forwards;
+}
+
+
+
+
+
+
+
+
 </style>
 </head>
 <body>
@@ -206,8 +251,18 @@ footer button{
 
 <header>
   <div class="logo">
-    <img src="https://postimg.cc/GTkB8DGP">
+    <img src="https://i.postimg.cc/vTK5KLmK/1770259659861.png">
   </div>
+
+
+
+
+
+
+<div id="falling-container" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:9999"></div>
+
+
+
 
 
 
@@ -286,6 +341,45 @@ footer button{
 
 
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مطعم RBg</title>
+  
+  <style>
+    :root{
+      --accent:#ff8a3d;
+      --accent2:#ffb26b;
+    }
+
+    /* باقي ستايلات الموقع الحالية ... */
+
+    /* ---- هنا تحط ستايل العناصر اللي هتنزل ---- */
+    .falling-item {
+      position:absolute;
+      top:-50px; /* يبدأ من فوق الشاشة */
+      font-size:30px; /* حجم الإيموجي */
+      pointer-events:none;
+      animation:fall linear forwards;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); opacity:1; }
+      100% { transform: translateY(100vh); opacity:0; }
+    }
+    
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- MODAL -->
@@ -297,25 +391,24 @@ footer button{
       <div id="outBtn" onclick="setMode('out')">توصيل</div>
     </div>
 
+
+
+<!-- اختيار الفرع -->
+<div class="branch-switch" style="display:flex;gap:10px;margin-bottom:10px">
+  <button id="miamiBtn" class="active" onclick="setBranch('ميامي', this)">ميامي</button>
+  <button id="sioufBtn" onclick="setBranch('السيوف', this)">السيوف</button>
+</div>
+
+
+
+
+
+
     <input id="name" placeholder="الاسم">
     <input id="phone" placeholder="رقم الهاتف">
     <input id="address" placeholder="العنوان">
 
     <div class="msg-preview" id="msgPreview">رسالة الطلب ستظهر هنا...</div>
-
-
-
-
-<button id="locationBtn" style="width:100%;margin-bottom:8px;
-background:linear-gradient(90deg,var(--accent),var(--accent2));
-border:none;border-radius:14px;padding:12px;font-weight:bold;cursor:pointer;">
-📍 تحديد موقعي الحالي
-</button>
-
-
-
-
-
 
     <!-- زر إرسال واتساب أكبر وجذاب -->
     <button style="
@@ -352,75 +445,55 @@ border:none;border-radius:14px;padding:12px;font-weight:bold;cursor:pointer;">
 
 
 
+
 <script>
-document.getElementById('locationBtn').onclick = function () {
-  if (!navigator.geolocation) {
-    alert('المتصفح لا يدعم تحديد الموقع');
-    return;
-  }
+let cat = 'سندوتشات';
+let mode = 'in';
+let cart = [];
 
-  navigator.geolocation.getCurrentPosition(
-    function (pos) {
-      const lat = pos.coords.latitude;
-      const lng = pos.coords.longitude;
-
-      const mapLink = `https://www.google.com/maps?q=${lat},${lng}`;
-
-      // يحط الرابط في العنوان
-      address.value = mapLink;
-
-      // يفتح الخريطة فورًا
-      window.open(mapLink, '_blank');
-
-      updateMsgPreview();
-    },
-    function () {
-      alert('من فضلك فعّل GPS واسمح بالموقع');
-    }
-  );
+// أرقام واتساب لكل فرع
+const WHATSAPP_NUMBERS = {
+  "ميامي": "+201284922288", // رقم واتساب ميامي
+  "السيوف": "+201222875841" // رقم واتساب السيوف
 };
 
-</script>
+let selectedBranch = 'ميامي'; // افتراضي
 
+function setBranch(branch, btn){
+  selectedBranch = branch;
+  document.getElementById('miamiBtn').classList.toggle('active', branch === 'ميامي');
+  document.getElementById('sioufBtn').classList.toggle('active', branch === 'السيوف');
+}
 
-
-
-
-
-
-<script>
-const WHATSAPP="+201284922288";
-let cat='سندوتشات';
-let mode='in';
-let cart=[];
+// باقي دوالك هنا مثل render()، setType()، chg()، calc()، sendWhats()...
 
 /* البيانات كاملة لكل الأصناف مع الصور الحقيقية */
 const items=[
- {id:1,cat:'سندوتشات',name:'Classic RBg',s:50,d:80,img:'https://postimg.cc/tYYtTSmK'},
+ {id:1,cat:'سندوتشات',name:'Classic RBg',s:60,d:80,img:'https://i.postimg.cc/brs57gzc/1770249138161.png'},
  {id:2,cat:'سندوتشات',name:'Big RBg',s:80,d:110,img:'https://postimg.cc/rzhNqXgK'},
- {id:3,cat:'سندوتشات',name:'F16 RBg',s:100,d:125,img:'https://postimg.cc/kRV6nZXp'},
+ {id:3,cat:'سندوتشات',name:'F16 RBg',s:100,d:125,img:'https://postimg.cc/CBsJGRjP'},
  {id:4,cat:'سندوتشات',name:'F16 Big RBg',s:100,d:140,img:'https://postimg.cc/HrFSdDY0'},
- {id:5,cat:'سندوتشات',name:'F16 Smokey',s:110,d:150,img:'رابط_صورة'},
- {id:6,cat:'سندوتشات',name:'Smash RBg',s:100,d:125,img:'https://postimg.cc/1gPqpJJw'},
- {id:7,cat:'سندوتشات',name:'Classic Beef RBg (On Fire)',s:60,d:85,img:'https://postimg.cc/zHYpWnb0'},
- {id:8,cat:'سندوتشات',name:'Beef RBg Spicy (On Fire)',s:65,d:100,img:'https://postimg.cc/m14NhBJ1'},
- {id:9,cat:'سندوتشات',name:'Beef RBg Mushroom',s:95,d:130,img:'https://postimg.cc/HrFSdDY0'},
- {id:10,cat:'سندوتشات',name:'Beef RBg مدخن',s:70,d:100,img:'https://postimg.cc/xqPFH458'},
- {id:11,cat:'سندوتشات',name:'Classic Chicken',s:85,d:120,img:'https://postimg.cc/Z0z163h8'},
- {id:12,cat:'سندوتشات',name:'Big Chicken',s:70,d:100,img:'رابط_صورة'},
- {id:13,cat:'سندوتشات',name:'F16 Chicken',s:65,d:100,img:'رابط_صورة'},
- {id:14,cat:'سندوتشات',name:'Baazooka Chicken',s:85,d:125,img:'رابط_صورة'},
- {id:15,cat:'سندوتشات',name:'Dragon Chicken',s:60,d:85,img:'رابط_صورة'},
- {id:16,cat:'سندوتشات',name:'Smokey Baazooka',s:105,d:125,img:'رابط_صورة'},
- {id:17,cat:'سندوتشات',name:'RBg Chicken on Fire Ranchy',s:85,d:120,img:'رابط_صورة'},
- {id:18,cat:'سندوتشات',name:'RBg Chicken on Fire Spicy',s:95,d:130,img:'رابط_صورة'},
+ {id:5,cat:'سندوتشات',name:'F16 Smokey',s:110,d:150,img:'https://postimg.cc/HrFSdDY0'},
+ {id:6,cat:'سندوتشات',name:'Smash RBg',s:100,d:125,img:'https://postimg.cc/xqPFH458'},
+ {id:7,cat:'سندوتشات',name:'Classic Beef RBg (On Fire)',s:60,d:85,img:'https://postimg.cc/2qBKZjc0'},
+ {id:8,cat:'سندوتشات',name:'Beef RBg Spicy (On Fire)',s:65,d:100,img:'https://postimg.cc/4KK1S8pV'},
+ {id:9,cat:'سندوتشات',name:'Beef RBg Mushroom',s:95,d:130,img:'https://postimg.cc/Z0z163h8'},
+ {id:10,cat:'سندوتشات',name:'Beef RBg مدخن',s:70,d:100,img:'https://postimg.cc/m14NhBJ1'},
+ {id:11,cat:'سندوتشات',name:'Classic Chicken',s:85,d:120,img:'https://postimg.cc/4KK1S8pV'},
+ {id:12,cat:'سندوتشات',name:'Big Chicken',s:70,d:100,img:'https://postimg.cc/zHYpWnb0'},
+ {id:13,cat:'سندوتشات',name:'F16 Chicken',s:65,d:100,img:'https://postimg.cc/m14NhBJ1'},
+ {id:14,cat:'سندوتشات',name:'Baazooka Chicken',s:85,d:125,img:'https://postimg.cc/Z0z163h8'},
+ {id:15,cat:'سندوتشات',name:'Dragon Chicken',s:60,d:85,img:'https://postimg.cc/2qBKZjc0'},
+ {id:16,cat:'سندوتشات',name:'Smokey Baazooka',s:105,d:125,img:'https://postimg.cc/2qBKZjc0'},
+ {id:17,cat:'سندوتشات',name:'RBg Chicken on Fire Ranchy',s:85,d:120,img:'https://postimg.cc/zHYpWnb0'},
+ {id:18,cat:'سندوتشات',name:'RBg Chicken on Fire Spicy',s:95,d:130,img:'https://postimg.cc/m14NhBJ1'},
  // البطاطس
  {id:20,cat:'بطاطس',name:'بطاطس سادة',s:35,img:'https://postimg.cc/3yMZzX1z'},
  {id:21,cat:'بطاطس',name:'بطاطس جبنة',s:45,img:'https://postimg.cc/K13N9qP1'},
- {id:22,cat:'بطاطس',name:'بطاطس بسطرمة جبنة',s:50,img:'رابط_صورة'},
- {id:23,cat:'بطاطس',name:'بطاطس سوسيس جبنة',s:50,img:'رابط_صورة'},
- {id:24,cat:'بطاطس',name:'بطاطس فلفل هالبينو باربيكيو',s:50,img:'https://postimg.cc/hzc1tKHr'},
- {id:25,cat:'بطاطس',name:'بطاطس استربس جبنة',s:60,img:'https://postimg.cc/rRpG5QyG'},
+ {id:22,cat:'بطاطس',name:'بطاطس بسطرمة جبنة',s:50,img:'https://postimg.cc/rRpG5QyG'},
+ {id:23,cat:'بطاطس',name:'بطاطس سوسيس جبنة',s:50,img:'https://postimg.cc/hzc1tKHr'},
+ {id:24,cat:'بطاطس',name:'بطاطس فلفل هالبينو باربيكيو',s:50,img:'https://postimg.cc/3yMZzX1z'},
+ {id:25,cat:'بطاطس',name:'بطاطس استربس جبنة',s:60,img:'https://postimg.cc/K13N9qP1'},
  // الصوصات
  {id:26,cat:'صوصات',name:'هالبينو',s:10,d:15,img:'رابط_صورة'},
  {id:27,cat:'صوصات',name:'صوص شيدر',s:10,d:25,img:'رابط_صورة'},
@@ -517,8 +590,9 @@ function updateMsgPreview(){
 
 function sendWhats(){
  updateMsgPreview();
- let text=encodeURIComponent(document.getElementById('msgPreview').innerText);
- window.open(`https://wa.me/${WHATSAPP}?text=${text}`);
+ let text = encodeURIComponent(document.getElementById('msgPreview').innerText);
+ let number = WHATSAPP_NUMBERS[selectedBranch]; // الرقم يتغير حسب الفرع
+ window.open(`https://wa.me/${number}?text=${text}`);
 }
 
 /* الترحيب */
@@ -527,6 +601,94 @@ function closeWelcome(){
 }
 
 render();
+
+
+
+
+
+function render(){
+ const list=document.getElementById('list');
+ list.innerHTML='';
+ let delay = 0;
+ items.filter(i=>i.cat===cat).forEach(p=>{
+  let it=cart.find(x=>x.id===p.id);
+  if(!it){it={id:p.id,qty:0,type:'s',price:p.s};cart.push(it);}
+  list.innerHTML+=`
+  <div class="card">
+    <div class="item" style="animation-delay:${delay}s">
+      <img src="${p.img}">
+      <div>
+        <b>${p.name}</b>
+        ${p.d?`
+        <div class="toggle">
+          <button class="${it.type=='s'?'active':''}" onclick="setType(${p.id},'s')">سنجل: ${p.s}</button>
+          <button class="${it.type=='d'?'active':''}" onclick="setType(${p.id},'d')">دبل: ${p.d}</button>
+        </div>`:''}
+        <div class="row">
+          <span>${it.price} جنيه</span>
+          <div class="qty">
+            <button onclick="chg(${p.id},-1)">-</button>
+            ${it.qty}
+            <button class="plus" onclick="chg(${p.id},1)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  delay += 0.1; // كل عنصر يتأخر عن اللي قبله 0.1 ثانية
+ });
+ calc();
+}
+
+
+
+
+
+const ramadanIcons = ["🍔","🍗","🍟","🍅","🍔","🍔"];
+const MAX_ITEMS = 10; // أقصى عدد عناصر على الشاشة
+const SPAWN_RATE = 450; // كل قد ايه يظهر عنصر جديد (ملي ثانية)
+const fallingContainer = document.getElementById('falling-container');
+
+let itemsOnScreen = 0;
+
+function createFallingItem() {
+    if(itemsOnScreen >= MAX_ITEMS) return;
+
+    const item = document.createElement('div');
+    item.classList.add('falling-item');
+
+    // اختيار إيموجي عشوائي
+    item.innerText = ramadanIcons[Math.floor(Math.random() * ramadanIcons.length)];
+
+    // اختيار موقع أفقي عشوائي
+    item.style.left = Math.random() * (window.innerWidth - 30) + 'px';
+
+    // مدة مختلفة لكل عنصر بين 4 و 7 ثواني
+    const duration = 4 + Math.random() * 3;
+    item.style.animationDuration = duration + 's';
+
+    // إزالة العنصر بعد انتهاء الأنيميشن
+    item.addEventListener('animationend', () => {
+        item.remove();
+        itemsOnScreen--;
+    });
+
+    fallingContainer.appendChild(item);
+    itemsOnScreen++;
+}
+
+// إنشاء عناصر جديدة بشكل متكرر
+setInterval(createFallingItem, SPAWN_RATE);
+
+
+
+
+
+
+
+
+
+
 </script>
 
 </body>
