@@ -243,6 +243,74 @@ gap:4px;
 accent-color: #ff8a3d;
 }
 
+
+
+.delivery-box {
+  margin: 15px 0;
+}
+
+.delivery-box label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #ff8a3d; /* نفس لون الأزرار */
+  font-size: 14px;
+}
+
+#deliveryZone {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff8a3d, #ffb26b);
+  color: #000;
+  cursor: pointer;
+  outline: none;
+}
+
+/* لما تدوس عليها */
+#deliveryZone:focus {
+  box-shadow: 0 0 0 2px rgba(255,138,61,0.4);
+}
+
+/* شكل الاختيارات */
+#deliveryZone option {
+  background: #020617;
+  color: #fff;
+  font-weight: normal;
+}
+
+
+
+
+.logo {
+  position: relative;
+  display: inline-block;
+  z-index: 0.1; /* للتأكد أن الإضاءة تحته */
+  /* لو عايز تكبر الهالّو ممكن تزود padding أو margin */
+}
+
+.logo img {
+  display: block;
+  width: 160px; /* حجم اللوجو */
+  height: auto;
+  
+  /* الهالّو الأبيض المحيط */
+  box-shadow: 
+    0 0 20px rgba(255,255,255,0.3),   /* ضوء خفيف من الأمام */
+    0 0 40px rgba(255,255,255,0.2),   /* ضوء أكبر وأخف */
+    0 0 60px rgba(255,255,255,0.15);  /* ضوء خارجي خفيف جدا */
+}
+
+
+
+
+
+
+
+
 </style>  
 </head>  
 <body>  <!-- مودال الترحيب -->  <div id="welcomeModal">  
@@ -253,16 +321,16 @@ accent-color: #ff8a3d;
   </div>  
 </div>  <header>  
   <div class="logo">  
-    <img src="https://i.postimg.cc/vTK5KLmK/1770259659861.png">  
+    <img src="https://i.postimg.cc/sDcgNK6M/1770259659861.png">  
   </div>  <div id="falling-container" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:9999"></div>    <div class="social">  
   <a href="https://wa.me/01284922288" target="_blank">  
-    <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" class="social-icon anim-up">  
+    <img src="https://i.postimg.cc/sDcgNK6M/1770259659861.png" class="social-icon anim-up">  
   </a>  
-  <a href="https://www.facebook.com/" target="_blank">  
+  <a href="https://www.facebook.com/share/1D1W5F5YFa/">  
     <img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" class="social-icon anim-down">  
   </a>  
- <a href="https://www.tiktok.com/" target="_blank">  
-  <img src="https://i.postimg.cc/0NV9Ytjy/Messenger-creation-D817A9D0-2F3A-41AB-95C6-810670EFA099.gif" class="social-icon anim-up" style="width:34px;height:34px;">  
+ <a href="https://www.tiktok.com/@rbg1002?_r=1&_d=em566iff0g321i&sec_uid=MS4wLjABAAAA5qp630RfIzzmXAboY9XsaN54JZYPCwc7dx-LG5-UtuoO1OPtIb1a2sjxca9x-Kib&share_author_id=6602288548874240005&sharer_language=ar&source=h5_m&u_code=ebc1461gba9786&timestamp=1770503958&user_id=7309052759792616454&sec_user_id=MS4wLjABAAAA5ov27Y2TiSFKzu2MKsey9eU3M0CI6KQcmsV-YomperiNQQ-528p65JNvW_A0Nfv2&item_author_type=2&utm_source=whatsapp_business&utm_campaign=client_share&utm_medium=android&share_iid=7604110135103538965&share_link_id=ff9709ac-8e2f-4f30-a16d-7c007d9f707d&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b6880%2Cb5836&social_share_type=5&enable_checksum=1" target="_blank">  
+  <img src="https://i.postimg.cc/4djRMHVN/Messenger-creation-D817A9D0-2F3A-41AB-95C6-810670EFA099.gif" class="social-icon anim-up" style="width:34px;height:34px;">  
 </a>  
 </div>  <style>  
 .social-icon{  
@@ -339,6 +407,45 @@ accent-color: #ff8a3d;
 <input id="phone" placeholder="رقم الهاتف">  
 <input id="address" placeholder="العنوان">  
 
+
+
+<div class="delivery-box" id="deliveryBox">
+  <label>اختر منطقة التوصيل</label>
+  <select id="deliveryZone">
+    <option value="">اختر المنطقة</option>
+  
+  
+  
+   
+  
+    <option value="0"> استلم من المطعم </option>
+  
+  
+  
+    <option value="20">اسكندر ابراهيم – 20 جنيه</option>
+    <option value="25">خليل حمادة – 25 جنيه</option>
+    <option value="30">مندره بحري – 30 جنيه</option>
+    <option value="35">مندره قبلي – 35 جنيه</option>
+    <option value="25">45 بحري – 25 جنيه</option>
+    <option value="35">45 قبلي – 35 جنيه</option>
+    <option value="30">سيدي بشر بحري – 30 جنيه</option>
+    <option value="30">محمد نجيب – 30 جنيه</option>
+    <option value="35">سيدي بشر قبلي – 35 جنيه</option>
+    <option value="35">سيدي بشر ترام – 35 جنيه</option>
+    <option value="40">ستان ستيفانو – 40 جنيه</option>
+    <option value="45">جانكليس – 45 جنيه</option>
+    <option value="50">سيدي جابر – 50 جنيه</option>
+    <option value="40">منتزه – 40 جنيه</option>
+    <option value="45">معمورة – 45 جنيه</option>
+    <option value="50">معمورة شاطئ – 50 جنيه</option>
+    <option value="55">أبو قير – 55 جنيه</option>
+  </select>
+</div>
+
+
+
+
+
 <div class="msg-preview" id="msgPreview">رسالة الطلب ستظهر هنا...</div>  
 
 <!-- زر إرسال واتساب أكبر وجذاب -->  
@@ -375,6 +482,17 @@ accent-color: #ff8a3d;
 let cat = 'سندوتشات';  
 let mode = 'in';  
 let cart = [];  
+  
+  
+  
+  
+  const deliveryZone = document.getElementById('deliveryZone');
+let deliveryFee = 0;
+  const nameInput = document.getElementById('name');
+const phoneInput = document.getElementById('phone');
+const addressInput = document.getElementById('address');
+  
+  
   
   
   
@@ -416,43 +534,91 @@ function setBranch(branch, btn){
   
 /* البيانات كاملة لكل الأصناف مع الصور الحقيقية */  
 const items=[  
- {id:1,cat:'سندوتشات',name:'Classic RBg',s:60,d:80,img:'https://i.postimg.cc/CLB8fBFv/1770250977061.png'},  
- {id:2,cat:'سندوتشات',name:'Big RBg',s:80,d:110,img:'https://i.postimg.cc/Xq7Ych64/1770251211583.png'},  
- {id:3,cat:'سندوتشات',name:'F16 RBg',s:100,d:125,img:'https://postimg.cc/CBsJGRjP'},  
- {id:4,cat:'سندوتشات',name:'F16 Big RBg',s:100,d:140,img:'https://postimg.cc/HrFSdDY0'},  
- {id:5,cat:'سندوتشات',name:'F16 Smokey',s:110,d:150,img:'https://postimg.cc/HrFSdDY0'},  
- {id:6,cat:'سندوتشات',name:'Smash RBg',s:100,d:125,img:'https://postimg.cc/xqPFH458'},  
- {id:7,cat:'سندوتشات',name:'Classic Beef RBg (On Fire)',s:60,d:85,img:'https://postimg.cc/2qBKZjc0'},  
- {id:8,cat:'سندوتشات',name:'Beef RBg Spicy (On Fire)',s:65,d:100,img:'https://postimg.cc/4KK1S8pV'},  
- {id:9,cat:'سندوتشات',name:'Beef RBg Mushroom',s:95,d:130,img:'https://postimg.cc/Z0z163h8'},  
- {id:10,cat:'سندوتشات',name:'Beef RBg مدخن',s:70,d:100,img:'https://postimg.cc/m14NhBJ1'},  
- {id:11,cat:'سندوتشات',name:'Classic Chicken',s:85,d:120,img:'https://postimg.cc/4KK1S8pV'},  
- {id:12,cat:'سندوتشات',name:'Big Chicken',s:70,d:100,img:'https://postimg.cc/zHYpWnb0'},  
- {id:13,cat:'سندوتشات',name:'F16 Chicken',s:65,d:100,img:'https://postimg.cc/m14NhBJ1'},  
- {id:14,cat:'سندوتشات',name:'Baazooka Chicken',s:85,d:125,img:'https://postimg.cc/Z0z163h8'},  
- {id:15,cat:'سندوتشات',name:'Dragon Chicken',s:60,d:85,img:'https://postimg.cc/2qBKZjc0'},  
- {id:16,cat:'سندوتشات',name:'Smokey Baazooka',s:105,d:125,img:'https://postimg.cc/2qBKZjc0'},  
- {id:17,cat:'سندوتشات',name:'RBg Chicken on Fire Ranchy',s:85,d:120,img:'https://postimg.cc/zHYpWnb0'},  
- {id:18,cat:'سندوتشات',name:'RBg Chicken on Fire Spicy',s:95,d:130,img:'https://postimg.cc/m14NhBJ1'},  
+ {id:1,cat:'سندوتشات',name:'Classic RBg',s:60,d:80,img:'https://i.postimg.cc/13V53P51/1770249138161.png'},  
+ {id:2,cat:'سندوتشات',name:'Big RBg',s:80,d:110,img:'https://i.postimg.cc/mrwxb698/1770251211583.png'},  
+ {id:3,cat:'سندوتشات',name:'F16 RBg',s:100,d:125,img:'https://i.postimg.cc/3NqY3D26/1770251237946.png'},  
+ {id:4,cat:'سندوتشات',name:'F16 Big RBg',s:100,d:140,img:'https://i.postimg.cc/QdtYpyGJ/1770251211583.png'},  
+ {id:5,cat:'سندوتشات',name:'F16 Smokey',s:110,d:150,img:'https://i.postimg.cc/tRkz2Nzx/1770251097064.png'},  
+ {id:6,cat:'سندوتشات',name:'Smash RBg',s:100,d:125,img:'https://i.postimg.cc/fLB0jBhL/1770251311814.png'},  
+ {id:7,cat:'سندوتشات',name:'Classic Beef RBg (On Fire)',s:60,d:85,img:'https://i.postimg.cc/1552Rtt8/1770414590918.png'},  
+ {id:8,cat:'سندوتشات',name:'Beef RBg Spicy (On Fire)',s:65,d:100,img:'https://i.postimg.cc/QMp0JGtc/1770251149994.png'},  
+ {id:9,cat:'سندوتشات',name:'Beef RBg Mushroom',s:95,d:130,img:'https://i.postimg.cc/5tMm0737/1770251177180.png'},  
+ {id:10,cat:'سندوتشات',name:'Beef RBg مدخن',s:70,d:100,img:'https://i.postimg.cc/5tMm0737/1770251177180.png'},  
+ {id:11,cat:'سندوتشات',name:'Classic Chicken',s:85,d:120,img:'https://i.postimg.cc/Bv0HBjRM/1770249138161.png'},  
+ {id:12,cat:'سندوتشات',name:'Big Chicken',s:70,d:100,img:'https://i.postimg.cc/pTyTfxVK/1770249404346.png'},  
+ {id:13,cat:'سندوتشات',name:'F16 Chicken',s:65,d:100,img:'https://i.postimg.cc/Jn9X6KhB/1770249196733.png'},  
+ {id:14,cat:'سندوتشات',name:'Baazooka Chicken',s:85,d:125,img:'https://i.postimg.cc/C1fBqD4G/1770249339099.png'},  
+ {id:15,cat:'سندوتشات',name:'Dragon Chicken',s:60,d:85,img:'https://i.postimg.cc/Jn9X6KhB/1770249196733.png'},  
+ {id:16,cat:'سندوتشات',name:'Smokey Baazooka',s:105,d:125,img:'https://i.postimg.cc/Z5RqNpbT/1770249354748.png'},  
+ {id:17,cat:'سندوتشات',name:'RBg Chicken on Fire Ranchy',s:85,d:120,img:'https://i.postimg.cc/FsSMBKT6/1770419160172.png'},  
+ {id:18,cat:'سندوتشات',name:'RBg Chicken on Fire Spicy',s:95,d:130,img:'https://i.postimg.cc/xd2F7yc4/1770418857350.png'},  
  // البطاطس  
- {id:20,cat:'بطاطس',name:'بطاطس سادة',s:35,img:'https://postimg.cc/3yMZzX1z'},  
- {id:21,cat:'بطاطس',name:'بطاطس جبنة',s:45,img:'https://postimg.cc/K13N9qP1'},  
- {id:22,cat:'بطاطس',name:'بطاطس بسطرمة جبنة',s:50,img:'https://postimg.cc/rRpG5QyG'},  
- {id:23,cat:'بطاطس',name:'بطاطس سوسيس جبنة',s:50,img:'https://postimg.cc/hzc1tKHr'},  
- {id:24,cat:'بطاطس',name:'بطاطس فلفل هالبينو باربيكيو',s:50,img:'https://postimg.cc/3yMZzX1z'},  
- {id:25,cat:'بطاطس',name:'بطاطس استربس جبنة',s:60,img:'https://postimg.cc/K13N9qP1'},  
+ {id:20,cat:'بطاطس',name:'بطاطس سادة',s:35,img:'https://i.postimg.cc/HxvkLL5T/1770419335455.png'},  
+ {id:21,cat:'بطاطس',name:'بطاطس جبنة',s:45,img:'https://i.postimg.cc/gjRjBWws/1770249934946.png'},  
+ {id:22,cat:'بطاطس',name:'بطاطس بسطرمة جبنة',s:50,img:'https://i.postimg.cc/DfctLNpN/1770419437750.png'},  
+ {id:23,cat:'بطاطس',name:'بطاطس سوسيس جبنة',s:50,img:'https://i.postimg.cc/QCMSpfH8/images-(11).jpg'}, 
+  
+ {id:24,cat:'بطاطس',name:'بطاطس فلفل هالبينو باربيكيو',s:50,img:'https://i.postimg.cc/SxQQc8GZ/1770419705222.png'},
+ 
+ 
+ 
+ {id:25,cat:'بطاطس',name:'بطاطس استربس جبنة',s:60,img:'https://i.postimg.cc/ZYjMCdCP/bf380492-6bb0-4942-8ce8-4dbd97da014f.webp'},  
  // الصوصات  
- {id:26,cat:'صوصات',name:'هالبينو',s:10,d:15,img:'رابط_صورة'},  
- {id:27,cat:'صوصات',name:'صوص شيدر',s:10,d:25,img:'رابط_صورة'},  
- {id:28,cat:'صوصات',name:'باربيكيو',s:10,d:25,img:'رابط_صورة'},  
- {id:29,cat:'صوصات',name:'بيج تيستي',s:15,d:25,img:'رابط_صورة'},  
- {id:30,cat:'صوصات',name:'صوص رانش',s:15,d:30,img:'رابط_صورة'},  
- // العروض  
- {id:31,cat:'عروض',name:'الصدمه ١ 🫣',s:100,img:'رابط_صورة'},  
- {id:32,cat:'عروض',name:'الصدمه ٢ 😍',s:110,img:'رابط_صورة'},  
- {id:33,cat:'عروض',name:'الصدمه ٣ 😜',s:140,img:'رابط_صورة'},  
- {id:34,cat:'عروض',name:'الصدمه ٤ 🤪',s:120,img:'رابط_صورة'},  
- {id:35,cat:'عروض',name:'الصدمه ٥ 🫣',s:150,img:'رابط_صورة'}  
+ {id:26,cat:'صوصات',name:'هالبينو',s:10,d:15,img:'https://i.postimg.cc/xqr1V4rx/1770421294728.png'},  
+ {id:27,cat:'صوصات',name:'صوص شيدر',s:10,d:25,img:'https://i.postimg.cc/fThVFVw4/1770421760591.png'},  
+ {id:28,cat:'صوصات',name:'باربيكيو',s:10,d:25,img:'https://i.postimg.cc/d129MzTt/images-(8).jpg'},  
+ {id:29,cat:'صوصات',name:'بيج تيستي',s:15,d:25,img:'https://i.postimg.cc/YSwGcjNm/images-(9).jpg'},  
+ {id:30,cat:'صوصات',name:'صوص رانش',s:15,d:30,img:'https://i.postimg.cc/Gh8HHvqP/images-(10).jpg'},  
+ /// العروض
+// العروض
+{
+  id:31,
+  cat:'عروض',
+  name:`الصدمه ١ 🫣
+١ سنجل لحمه
+١ سنجل فراخ`,
+  s:100,
+  img:'https://i.postimg.cc/s2GcyGCp/1770495153254.png'
+},
+
+{
+  id:32,
+  cat:'عروض',
+  name:`الصدمه ٢ 😍
+٢ سنجل دراجون`,
+  s:110,
+  img:'https://i.postimg.cc/2jTrnVgC/1770494500235.png'
+},
+
+{
+  id:33,
+  cat:'عروض',
+  name:`الصدمه ٣ 😜
+١ سنجل لحمه F16
+١ سنجل بازوكا`,
+  s:140,
+  img:'https://i.postimg.cc/43hp9Cdy/1770497886419.png'
+},
+
+{
+  id:34,
+  cat:'عروض',
+  name:`الصدمه ٤ 🤪
+١ بيف مشروم سنجل
+١ بيف موتزاريلا ستيك سنجل`,
+  s:120,
+  img:'https://i.postimg.cc/PxW31vxx/1770498918156.png'
+},
+
+{
+  id:35,
+  cat:'عروض',
+  name:`الصدمه ٥ 🫣
+١ سنجل تشيكن رانش مشوي
+١ سماش سنجل مشروم`,
+  s:150,
+  img:'https://i.postimg.cc/8kFB86Dv/1770499454749.png'
+}
 ];  
   
 function setCat(c,e){  
@@ -513,19 +679,52 @@ function chg(id,n){
 }  
   
 function calc(){  
- let totalVal=cart.reduce((s,i)=>s+i.qty*i.price,0);  
- document.getElementById('total').innerText=totalVal;  
+ let itemsTotal = cart.reduce((s,i)=>s+i.qty*i.price,0);
+let finalTotal = itemsTotal + deliveryFee;
+
+document.getElementById('total').innerText = finalTotal;  
  updateMsgPreview();  
 }  
   
 function openModal(){modal.classList.add('active')}  
-function setMode(m){  
- mode=m;  
- inBtn.classList.toggle('active',m=='in');  
- outBtn.classList.toggle('active',m=='out');  
- address.style.display=m=='out'?'block':'none';  
- if(m=='in')address.value='';  
-}  
+function setMode(m){
+  mode = m;
+
+  inBtn.classList.toggle('active', m === 'in');
+  outBtn.classList.toggle('active', m === 'out');
+
+  // العنوان
+  address.style.display = m === 'out' ? 'block' : 'none';
+
+  // منطقة التوصيل
+  deliveryBox.style.display = m === 'out' ? 'block' : 'none';
+
+  if(m === 'in'){
+    address.value = '';
+    deliveryZone.value = '';
+    deliveryFee = 0;
+  }
+
+  calc();
+}
+
+
+
+
+deliveryZone.addEventListener('change', () => {
+  deliveryFee = Number(deliveryZone.value || 0);
+  calc();
+});
+
+
+
+
+
+
+
+
+
+
   
 function updateMsgPreview(){  
  let msg='طلب جديد:\n\n';  
@@ -542,12 +741,28 @@ function updateMsgPreview(){
  });  
   
  msg+=`الإجمالي: ${total.innerText} جنيه\n`;  
- msg+=`الاسم: ${name.value || 'غير محدد'}\n`;  
- msg+=`رقم الهاتف: ${phone.value || 'غير محدد'}`;  
-  
- if(mode=='out'){  
-   msg+=`\nالعنوان: ${address.value || 'غير محدد'}`;  
- }  
+ msg+=`الاسم: ${nameInput.value.trim() || 'غير محدد'}\n`;  
+msg+=`رقم الهاتف: ${phoneInput.value.trim() || 'غير محدد'}`;  
+
+if(mode=='out'){  
+  msg+=`\nالعنوان: ${addressInput.value.trim() || 'غير محدد'}`;  
+}
+
+
+
+
+if(mode=='out' && deliveryZone.value){
+  const zoneName = deliveryZone.options[deliveryZone.selectedIndex].text;
+  msg+=`\nمنطقة التوصيل: ${zoneName}`;
+  msg+=`\nسعر التوصيل: ${deliveryFee} جنيه`;
+}
+
+
+
+
+
+
+ 
   
  document.getElementById('msgPreview').innerText=msg;  
 }  
@@ -587,14 +802,16 @@ function render(){
 <div>  
   <b>${p.name}</b>  
   
-  <!-- إضافات الساندوتش -->  
-  <div class="options" style="margin:6px 0;font-size:13px">  
-    <label><input type="checkbox" onchange="toggleOpt(${p.id},'طماطم')"> طماطم</label>  
-    <label><input type="checkbox" onchange="toggleOpt(${p.id},'خس')"> خس</label>  
-    <label><input type="checkbox" onchange="toggleOpt(${p.id},'بصل')"> بصل</label>  
-    <label><input type="checkbox" onchange="toggleOpt(${p.id},'هالبينو')"> هالبينو</label>  
-    <label><input type="checkbox" onchange="toggleOpt(${p.id},'جبنة سبايسي')"> جبنة سبايسي</label>  
-    <label><input type="checkbox" onchange="toggleOpt(${p.id},'جبنة متبلة')"> جبنة متبلة</label>  
+${p.cat === 'سندوتشات' ? `
+  <div class="options" style="margin:6px 0;font-size:13px">
+    <label><input type="checkbox" onchange="toggleOpt(${p.id},'طماطم')"> طماطم</label>
+    <label><input type="checkbox" onchange="toggleOpt(${p.id},'خس')"> خس</label>
+    <label><input type="checkbox" onchange="toggleOpt(${p.id},'بصل')"> بصل</label>
+    <label><input type="checkbox" onchange="toggleOpt(${p.id},'هالبينو')"> هالبينو</label>
+    <label><input type="checkbox" onchange="toggleOpt(${p.id},'جبنة سبايسي')"> جبنة سبايسي</label>
+    <label><input type="checkbox" onchange="toggleOpt(${p.id},'جبنة متبلة')"> جبنة متبلة</label>
+  </div>
+` : ``}
   </div>  
   
     
