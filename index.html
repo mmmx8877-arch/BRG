@@ -274,6 +274,16 @@ color:#000;
 
 
 
+
+
+
+
+
+
+
+
+
+
 </style>
 </head>
 <body>
@@ -293,7 +303,7 @@ color:#000;
   <div id="falling-container" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:9999"></div>
   <div class="social">
     <a href="https://wa.me/01284922288" target="_blank">
-      <img src="https://i.postimg.cc/sDcgNK6M/1770259659861.png" class="social-icon anim-up">
+      <img src="" class="social-icon anim-up">
     </a>
     <a href="https://www.facebook.com/" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" class="social-icon anim-down">
@@ -302,6 +312,21 @@ color:#000;
       <img src="https://i.postimg.cc/4djRMHVN/Messenger-creation-D817A9D0-2F3A-41AB-95C6-810670EFA099.gif" class="social-icon anim-up" style="width:34px;height:34px;">
     </a>
   </div>
+  
+  
+  
+  <!-- صندوق تحميل التطبيق -->
+<div style="text-align:center; margin:15px auto; background:#ff4d4d; padding:8px 12px; border-radius:12px; width:140px; box-shadow:0 4px 6px rgba(0,0,0,0.3);">
+  <a href="رابط_تحميل_التطبيق" target="_blank" style="text-decoration:none; color:#fff;">
+    <img src="https://i.postimg.cc/sDcgNK6M/1770259659861.png" alt="App Icon" style="width:40px; height:40px; display:block; margin:0 auto 5px;">
+    <span style="font-weight:bold; font-size:14px;">تحميل التطبيق</span>
+  </a>
+</div>
+  
+  
+  
+  
+  
   <div class="tabs">
     <div class="tab active" onclick="setCat('سندوتشات',this)">سندوتشات</div>
     <div class="tab" onclick="setCat('بطاطس',this)">بطاطس</div>
@@ -333,6 +358,39 @@ color:#000;
     <input id="name" placeholder="الاسم">
     <input id="phone" placeholder="رقم الهاتف">
     <input id="address" placeholder="العنوان">
+    
+    
+<div id="readyNotice" style="
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    color: #000;
+    padding: 10px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+">
+  الطلب هيكون جاهز في خلال 45 دقيقة
+</div>
+    
+    
+    
+  
+    
+    
+<script>
+function showRamadan() {
+  // إخفاء باقي الأقسام
+  document.querySelectorAll('.category-section').forEach(sec => sec.style.display = 'none');
+  // إظهار وجبة رمضان
+  document.getElementById('ramadan-section').style.display = 'block';
+}
+</script>
+    
+    
+    
+    
+    
+    
 
     <div class="delivery-box" id="deliveryBox">
       <label>اختر منطقة التوصيل</label>
@@ -361,14 +419,91 @@ color:#000;
 
     <div class="msg-preview" id="msgPreview">رسالة الطلب ستظهر هنا...</div>
 
-    <button style="width:100%; margin-bottom:10px; padding:14px; font-size:18px; font-weight:bold; border:none; border-radius:16px; background:linear-gradient(90deg,#25D366,#128C7E); color:#fff; cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.3);" onclick="sendWhats()">إرسال واتساب</button>
+    <button id="sendBtn" 
+  style="width:100%; margin-bottom:10px; padding:14px; font-size:18px; font-weight:bold; border:none; border-radius:16px; background:linear-gradient(90deg,#25D366,#128C7E); color:#fff; cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.3);"
+  onclick="validateAndSend()">إرسال واتساب</button>
 
     <button style="width:100%; padding:14px; font-size:18px; font-weight:bold; border:none; border-radius:16px; background:#ff4d4d; color:#fff; cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.3);" onclick="modal.classList.remove('active')">إلغاء الطلب</button>
 
   </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
+  
+  
+  
+  function validateAndSend(){
+  const name = nameInput.value.trim();
+  const phone = phoneInput.value.trim();
+  const address = addressInput.value.trim();
+  const zone = deliveryZone.value;
+
+  // رقم الموبايل 11 رقم
+  if(!/^\d{11}$/.test(phone)){
+showCustomAlert("رقم المحمول يجب أن يكون 11 رقم");
+    return;
+  }
+
+  // الاستلام
+  if(mode === 'in'){
+    if(name.split(" ").length < 3){
+   showCustomAlert   ("❌ من فضلك اكتب الاسم الثلاثي");
+      return;
+    }
+
+    // تمام → واتساب
+    sendWhats();
+    return;
+  }
+
+  // التوصيل
+  if(mode === 'out'){
+    if(zone === ""){
+     showCustomAlert ("❌ لازم تختار منطقة التوصيل الأول");
+      return;
+    }
+
+    if(name.split(" ").length < 3){
+     showCustomAlert ("❌ من فضلك اكتب الاسم الثلاثي");
+      return;
+    }
+
+    if(address === ""){
+      showCustomAlert("❌ من فضلك اكتب العنوان");
+      return;
+    }
+
+    // ✔️ كل الشروط تمام
+    showCustomAlert("✅ تم تأكيد الطلب بنجاح");
+    sendWhats();
+  }
+}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 // ===== إعدادات عامة =====
 let cat = 'سندوتشات';
 let mode = 'in';
@@ -392,94 +527,94 @@ const WHATSAPP_NUMBERS = {
 let selectedBranch = 'ميامي';
 // ===== بيانات الأصناف =====
 const items = [// ====== السندوتشات ======
-{id:1,cat:'سندوتشات',name:'Classic RBg',s:60,d:80,
-img:'https://i.postimg.cc/13V53P51/1770249138161.png',
-opts:['خس','طماطم','رانش','جبنة سايحة']
+{id:1,cat:'سندوتشات',name:'Classic RBg',s:60,d:85,
+img:'https://i.postimg.cc/gJdJMhQK/1770759126372.png',
+opts:[ 'خص','طماطم','رانش','جبنه سايحه']
 },
 
-{id:2,cat:'سندوتشات',name:'Big RBg',s:80,d:110,
+{id:2,cat:'سندوتشات',name:'Big RBg',s:75,d:100,
 img:'https://i.postimg.cc/mrwxb698/1770251211583.png',
-opts:['خس','طماطم','رانش','جبنة سايحة','موتزاريللا ستيك']
+opts:['خس','طماطم','بصل','جبنه سايحه','تكساس','موتزاريلا ستيك',]
 },
 
-{id:3,cat:'سندوتشات',name:'F16 RBg',s:100,d:125,
+{id:3,cat:'سندوتشات',name:'F16 RBg',s:85,d:110,
 img:'https://i.postimg.cc/3NqY3D26/1770251237946.png',
-opts:['برجر فراخ محشي جبنة','خس','طماطم','رانش','جبنة سايحة']
+opts:[ 'خص','طماطم','بصل','جبنه سايحه','تكساس',]
 },
 
-{id:4,cat:'سندوتشات',name:'F16 Big RBg',s:100,d:140,
+{id:4,cat:'سندوتشات',name:'F16 Big RBg',s:110,d:125,
 img:'https://i.postimg.cc/QdtYpyGJ/1770251211583.png',
-opts:['برجر اللحم المشوي محشو جبنة','خس','طماطم','بصل','جبنة سايحة','تكساس']
+opts:[ 'خس','طماطم','بصل','جبنه سايحه','تكساس',]
 },
 
-{id:5,cat:'سندوتشات',name:'F16 Smokey',s:110,d:150,
+{id:5,cat:'سندوتشات',name:'F16 Smokey',s:110,d:125,
 img:'https://i.postimg.cc/tRkz2Nzx/1770251097064.png',
 opts:['برجر اللحم المشوي محشو جبنة','سلامي مدخن','طماطم','بصل','جبنة سايحة','تكساس']
 },
 
-{id:6,cat:'سندوتشات',name:'Smash RBg',s:100,d:125,
+{id:6,cat:'سندوتشات',name:'Smash RBg',s:80,d:110,
 img:'https://i.postimg.cc/fLB0jBhL/1770251311814.png',
-opts:['لحمة سماش','خس','بصل مكرمل','جبنة سايحة','تكساس','باربيكيو']
+opts:['خس','بصل مكرميل','جبنه سايحه','تكساس','باربيكيو',]
 },
 
-{id:7,cat:'سندوتشات',name:'Classic Beef RBg (On Fire)',s:60,d:85,
+{id:7,cat:'سندوتشات',name:'Classic Beef RBg (On Fire)',s:100,d:140,
 img:'https://i.postimg.cc/1552Rtt8/1770414590918.png',
-opts:['قطعة لحمة صافي 180 جرام محشية جبنة','حلقات البصل المقلية','صوص شيدر','بيج تستي']
+opts:[ 'خس','طماطم','بصل','جبنه سايحه','صوص شيدر','بيج تستي',]
 },
 
-{id:8,cat:'سندوتشات',name:'Beef RBg Spicy (On Fire)',s:65,d:100,
+{id:8,cat:'سندوتشات',name:'Beef RBg Spicy (On Fire)',s:100,d:150,
 img:'https://i.postimg.cc/QMp0JGtc/1770251149994.png',
-opts:['قطعة لحمة صافي 180 جرام محشية جبنة','صوص شيدر','بيج تستي','هالبينو سويت شيلي']
+opts:['خس','طماطم','بصل','صوص شيدر','بيج تستي','هالبينو سويت شيلي',]
 },
 
-{id:9,cat:'سندوتشات',name:'Beef RBg Mushroom',s:95,d:130,
+{id:9,cat:'سندوتشات',name:'Beef RBg Mushroom',s:110,d:150,
 img:'https://i.postimg.cc/5tMm0737/1770251177180.png',
-opts:['قطعة لحمة صافي 180 جرام محشية جبنة','مشروم كريمي','صوص شيدر','تكساس','بيج تستي']
+opts:['خس','طماطم','بصل','كريمي صوص شيدر','بيج تستي',]
 },
 
-{id:10,cat:'سندوتشات',name:'Beef RBg مدخن',s:70,d:100,
+{id:10,cat:'سندوتشات',name:'Beef RBg مدخن',s:110,d:150,
 img:'https://i.postimg.cc/5tMm0737/1770251177180.png',
-opts:['قطعة لحمة صافي 180 جرام محشية جبنة','سلامي مدخن','صوص شيدر','باربيكيو','بيج تستي']
+opts:['خس','مطاطم','بصل','صوص شيدر','باربيكيو','بيج تستي',]
 },
 
-{id:11,cat:'سندوتشات',name:'Classic Chicken',s:85,d:120,
+{id:11,cat:'سندوتشات',name:'Classic Chicken',s:60,d:85,
 img:'https://i.postimg.cc/Bv0HBjRM/1770249138161.png',
-opts:['برجر فراخ','خس','طماطم','رانش','جبنة سايحة']
+opts:['خس','طماطم','رانش','جبنه سايحه',]
 },
 
-{id:12,cat:'سندوتشات',name:'Big Chicken',s:70,d:100,
+{id:12,cat:'سندوتشات',name:'Big Chicken',s:75,d:100,
 img:'https://i.postimg.cc/pTyTfxVK/1770249404346.png',
-opts:['برجر فراخ','خس','طماطم','رانش','جبنة سايحة','موتزاريللا ستيك']
+opts:[ 'خس','طماطم','رانش','جبنه سايحه','موتزاريلا ستيك',]
 },
 
-{id:13,cat:'سندوتشات',name:'F16 Chicken',s:65,d:100,
+{id:13,cat:'سندوتشات',name:'F16 Chicken',s:85,d:105,
 img:'https://i.postimg.cc/Jn9X6KhB/1770249196733.png',
-opts:['برجر فراخ محشي جبنة','خس','طماطم','رانش','جبنة سايحة']
+opts:['خس','طماطم','رانش','جبنه سايحه',]
 },
 
 {id:14,cat:'سندوتشات',name:'Baazooka Chicken',s:85,d:125,
 img:'https://i.postimg.cc/C1fBqD4G/1770249339099.png',
-opts:['صدور فراخ متبلة مقلية','صوص شيدر','رانش','باربيكيو','هالبينو']
+opts:['خس','طماطم','صوص الشيدر','رانش','باربيكيو','هالبينو',]
 },
 
 {id:15,cat:'سندوتشات',name:'Dragon Chicken',s:60,d:85,
 img:'https://i.postimg.cc/Jn9X6KhB/1770249196733.png',
-opts:['قطع فراخ','خس','جبنة سايحة','هالبينو','رانش']
+opts:['خس','طماطم','جبنه سايحه','هالبينو','رانش',]
 },
 
 {id:16,cat:'سندوتشات',name:'Smokey Baazooka',s:105,d:125,
 img:'https://i.postimg.cc/Z5RqNpbT/1770249354748.png',
-opts:['صدور فراخ متبلة مقلية','خس','جبنة سايحة','هالبينو','رانش','رومي مدخن']
+opts:['خس','طماطم','جبنه سايحه','هالبينو','رانش','رومي مدخن',]
 },
 
 {id:17,cat:'سندوتشات',name:'RBg Chicken on Fire Ranchy',s:85,d:120,
 img:'https://i.postimg.cc/FsSMBKT6/1770419160172.png',
-opts:['صدور فراخ متبلة مشوية','صوص الرانش الكريمي','صوص الشيدر','باربيكيو','بطاطس بصوص الشيدر']
+opts:['خس','طماطم','صوص الرانش','الكريمي','صوص الشيدر','باربيكيو',]
 },
 
 {id:18,cat:'سندوتشات',name:'RBg Chicken on Fire Spicy',s:95,d:130,
 img:'https://i.postimg.cc/xd2F7yc4/1770418857350.png',
-opts:['صدور فراخ متبلة مشوية','صوص الرانش الكريمي','صوص الشيدر','باربيكيو','هالبينو سويت شيلي']
+opts:['خس','طماطم','صوص الرانش','الكريمي','صوص الشيدر','باربيكيو','هالبينو','سويت شيلي',]
 },
 
  // البطاطس
@@ -502,6 +637,17 @@ opts:['صدور فراخ متبلة مشوية','صوص الرانش الكري�
  {id:34,cat:'عروض',name:`الصدمه ٤ 🤪\n١ بيف مشروم سنجل\n١ بيف موتزاريلا ستيك سنجل`, s:120,img:'https://i.postimg.cc/PxW31vxx/1770498918156.png'},
  {id:35,cat:'عروض',name:`الصدمه ٥ 🫣\n١ سنجل تشيكن رانش مشوي\n١ سماش سنجل مشروم`, s:150,img:'https://i.postimg.cc/8kFB86Dv/1770499454749.png'}
 ];
+
+
+
+
+
+
+
+
+
+
+
 
 // ===== التعامل مع الفروع =====
 function setBranch(branch, btn){
@@ -762,4 +908,57 @@ function createFallingItem(){
 
 setInterval(createFallingItem, SPAWN_RATE);
 
-      </script>
+
+
+
+function showCustomAlert(message){
+  document.getElementById("alertMessage").innerText = message;
+  document.getElementById("customAlert").style.display = "flex";
+}
+
+function closeCustomAlert(){
+  document.getElementById("customAlert").style.display = "none";
+}
+
+
+
+</script>     
+
+
+
+
+<!-- بوكس الرسائل -->
+<div id="customAlert" style="
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.7);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:99999;">
+  
+  <div style="
+    background:#111827;
+    padding:20px;
+    border-radius:16px;
+    text-align:center;
+    width:85%;
+    max-width:320px;">
+    
+    <div id="alertMessage" style="margin-bottom:15px;font-size:16px;"></div>
+    
+    <button onclick="closeCustomAlert()" style="
+      padding:8px 18px;
+      border:none;
+      border-radius:12px;
+      background:#25D366;
+      color:#fff;
+      font-weight:bold;">
+      حسناً
+    </button>
+
+  </div>
+</div>
+
+</script>
+  </html>
