@@ -276,6 +276,72 @@ color:#000;
 
 
 
+.chicken-divider{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:20px 0;
+}
+
+
+
+
+.chicken-divider{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  margin:14px 0;
+}
+
+
+
+
+
+.chicken-divider span{
+  width:100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  padding:10px 0;          /* أصغر */
+  border-radius:12px;
+  font-size:20px;          /* أصغر شوية */
+  font-weight:800;
+  color:#000;
+  text-align:center;
+  box-shadow:0 4px 8px rgba(0,0,0,0.35);
+}
+
+
+
+
+
+
+/* شريط اللمبات */
+.light-strip {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0;
+  background:#111827; /* نفس لون الخلفية */
+}
+
+.light-strip span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff8a3d;
+  animation: blink 1.5s infinite alternate;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -287,12 +353,64 @@ color:#000;
 </style>
 </head>
 <body>
+  
+  
+  
+
+  
+  
+<!-- زينة رمضان -->
+<div id="ramadanDecoration"></div>
+
+<style>
+#ramadanDecoration {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999998;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  pointer-events: none;
+}
+
+#ramadanDecoration span {
+  font-size: 24px;
+  opacity: 0.3;
+  animation: blink 0.5s infinite alternate;
+}
+
+@keyframes blink {
+  0% { opacity: 0.2; transform: scale(0.8);}
+  50% { opacity: 1; transform: scale(1);}
+  100% { opacity: 0.2; transform: scale(0.8);}
+}
+</style>
+
+<script>
+const shapes = ['🌙','⭐','🏮','✨','🕌','🌟'];
+const container = document.getElementById('ramadanDecoration');
+
+// إنشاء 30 عنصر من الزينة
+for(let i=0;i<30;i++){
+  const span = document.createElement('span');
+  span.textContent = shapes[Math.floor(Math.random()*shapes.length)];
+  span.style.animationDuration = (Math.random()*0.5 + 0.3) + 's';
+  container.appendChild(span);
+}
+</script>
+  
+  
+  
+  
+  
 <!-- مودال الترحيب -->
 <div id="welcomeModal">
   <div id="welcomeBox">
     <h2>أهلاً بك في مطعم RBg 🍔</h2>
     <p>اختر ما تريد من قائمة السندوتشات، البطاطس، الصوصات أو العروض!</p>
-    <button onclick="closeWelcome()">الغاء</button>
+    <button onclick="closeWelcome()">موافق🤝</button>
   </div>
 </div>
 
@@ -317,7 +435,7 @@ color:#000;
   
   <!-- صندوق تحميل التطبيق -->
 <div style="text-align:center; margin:15px auto; background:#ff4d4d; padding:8px 12px; border-radius:12px; width:140px; box-shadow:0 4px 6px rgba(0,0,0,0.3);">
-  <a href="رابط_تحميل_التطبيق" target="_blank" style="text-decoration:none; color:#fff;">
+  <a href="https://www.mediafire.com/file/j0j9omtcfvcubtt/RBG.apk/file" target="_blank" style="text-decoration:none; color:#fff;">
     <img src="https://i.postimg.cc/sDcgNK6M/1770259659861.png" alt="App Icon" style="width:40px; height:40px; display:block; margin:0 auto 5px;">
     <span style="font-weight:bold; font-size:14px;">تحميل التطبيق</span>
   </a>
@@ -343,6 +461,23 @@ color:#000;
     <button onclick="openModal()">تأكيد الطلب</button>
   </div>
 </footer>
+
+
+
+
+
+<!-- عناوين الفروع في أسفل الصفحة -->
+<div style="padding:15px; text-align:right; font-size:14px; color:#fff; line-height:1.6; background:#111827; margin-top:10px; border-top:1px solid #333;">
+  <p><strong>فرع ميامي:</strong> اسكندر ابراهيم على أول الشارع، محل كولكشن، الشارع بتاعه مطعم أرباجيه.</p>
+  <p><strong>فرع السيوف:</strong> وانت جاي من فكتوريا على أول الشارع قهوة شيخ البلد، هتخش منه هتلاقي المطعم على الشمال.</p>
+</div>
+
+
+
+
+
+
+
 
 <!-- MODAL -->
 <div class="modal" id="modal">
@@ -790,7 +925,30 @@ function render(){
 
   // نعرض فقط الأصناف من items حسب القسم
   let delay = 0;
-  items.filter(i=>i.cat===cat).forEach(p=>{
+  
+  
+  
+  
+  let chickenAdded = false;   // حطه قبل الـ forEach مباشرة
+
+items.filter(i=>i.cat===cat).forEach(p=>{
+
+  if(p.name === 'Classic Chicken' && !chickenAdded){
+    list.innerHTML += `
+      <div class="chicken-divider">
+        <span>🍗 Chicken</span>
+      </div>
+    `;
+    chickenAdded = true;   // علشان ما تتكررشي
+  }
+    
+    
+    
+    
+    
+    
+    
+    
     // عدد النسخ في الكارت من نفس الصنف
     const count = cart.filter(x=>x.id===p.id).length;
 
@@ -955,6 +1113,7 @@ z-index:99999;">
       color:#fff;
       font-weight:bold;">
       حسناً
+      
     </button>
 
   </div>
