@@ -339,7 +339,67 @@ color:#000;
 
 
 
+.hero-slider{
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 10px auto 20px;
+}
 
+.hero-slider img{
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transition: opacity .4s ease;
+}
+
+/* شكل السلايدر */
+.hero-slider{
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 10px auto 20px;
+  text-align: center;
+}
+
+/* الصورة */
+.hero-slider img{
+  width: 100%;
+  height: auto;          /* مهم جداً عشان الصورة تبان كاملة */
+  object-fit: contain;   /* يخلي الصورة كلها ظاهرة */
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  background: #111;      /* لو فيه فراغ يبان شيك */
+  transition: opacity .4s ease;
+}
+
+
+
+
+
+/* النقط */
+.slider-dots{
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.slider-dots .dot{
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.slider-dots .dot.active{
+  background: #ffb26b;   /* لون أوضح بدل var(--accent) */
+  transform: scale(1.3);
+}
 
 
 
@@ -416,8 +476,42 @@ for(let i=0;i<30;i++){
 
 <header>
   <div class="logo">
-    <img src="https://i.postimg.cc/sDcgNK6M/1770259659861.png">
+    <img src="">
   </div>
+  
+  
+  
+  
+  
+  
+  <!-- Slider -->
+<!-- Slider -->
+<div class="hero-slider">
+  <img id="heroImage" alt="RBG">
+</div>
+
+  <div class="slider-dots">
+    <span class="dot active" onclick="changeSlide(0)"></span>
+    <span class="dot" onclick="changeSlide(1)"></span>
+    <span class="dot" onclick="changeSlide(2)"></span>
+  </div>
+</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <div id="falling-container" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:9999"></div>
   <div class="social">
     <a href="https://wa.me/01284922288" target="_blank">
@@ -1134,5 +1228,48 @@ z-index:99999;">
   </div>
 </div>
 
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+const images = [
+  "https://i.postimg.cc/sDcgNK6M/1770259659861.png",
+  "https://i.postimg.cc/v84TcTXb/1770951165614.png",
+  "https://i.postimg.cc/Prkb2fsC/1770951430879.png"
+];
+
+let currentIndex = 0;
+const heroImage = document.getElementById("heroImage");
+const dots = document.querySelectorAll(".dot");
+
+/* أول صورة تظهر فور تحميل الصفحة */
+heroImage.removeAttribute("src"); 
+heroImage.src = images[0];
+heroImage.style.opacity = 1;
+
+function changeSlide(index){
+  currentIndex = index;
+  heroImage.style.opacity = 0;
+
+  setTimeout(()=>{
+    heroImage.src = images[currentIndex];
+    heroImage.style.opacity = 1;
+  },200);
+
+  if(dots.length){
+    dots.forEach(d => d.classList.remove("active"));
+    dots[currentIndex].classList.add("active");
+  }
+}
+
+/* تغيير تلقائي */
+setInterval(()=>{
+  currentIndex = (currentIndex + 1) % images.length;
+  changeSlide(currentIndex);
+}, 3500);
+
+});
 </script>
   </html>
