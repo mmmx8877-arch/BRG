@@ -112,20 +112,30 @@ font-weight:bold
 }
 /* MODAL */
 .modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.7);
-display:none;
-align-items:center;
-justify-content:center
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:10px;              /* مسافة بسيطة من أطراف الشاشة */
 }
-.modal.active{display:flex}
+
+.modal.active{
+  display:flex;
+}
+
 .box{
-background:#020617;
-padding:20px;
-border-radius:16px;
-width:90%;
-max-width:400px
+  background:#020617;
+  padding:20px;
+  border-radius:16px;
+  width:90%;
+  max-width:400px;
+
+  /* 👇 أهم تعديل */
+  height:90vh;               /* ارتفاع ثابت على قد الشاشة */
+  max-height:90vh;           /* يمنع التمدد */
+  overflow-y:auto;           /* سكرول داخلي لو المحتوى كتير */
 }
 .switch{display:flex;gap:10px;margin-bottom:10px}
 .switch div{
@@ -406,6 +416,63 @@ color:#000;
 
 
 
+/* شاشة التحميل */
+#loadingScreen{
+  position:fixed;
+  inset:0;
+  background:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999999;
+}
+
+/* محتوى التحميل */
+.loading-box{
+  text-align:center;
+}
+
+/* اللوجو */
+.loading-box img{
+  width:90px;
+  height:90px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
+  margin-bottom:15px;
+}
+
+/* النص */
+.loading-box p{
+  font-size:18px;
+  font-weight:bold;
+  color:#9b1c1c;
+  margin-bottom:15px;
+}
+
+/* الدائرة */
+.loader{
+  width:40px;
+  height:40px;
+  border:4px solid #eee;
+  border-top:4px solid #9b1c1c;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  to{ transform:rotate(360deg); }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -413,6 +480,19 @@ color:#000;
 </style>
 </head>
 <body>
+  
+  
+  
+  
+  
+  <!-- شاشة التحميل -->
+<div id="loadingScreen">
+  <div class="loading-box">
+    <img src="https://i.postimg.cc/sDcgNK6M/1770259659861.png" id="loadingLogo" alt="Logo">
+    <p>جاري التحميل...</p>
+    <div class="loader"></div>
+  </div>
+</div>
   
   
   
@@ -1052,12 +1132,7 @@ items.filter(i=>i.cat===cat).forEach(p=>{
   }
     
     
-    
-    
-    
-    
-    
-    
+  
     // عدد النسخ في الكارت من نفس الصنف
     const count = cart.filter(x=>x.id===p.id).length;
 
@@ -1191,9 +1266,6 @@ function closeCustomAlert(){
 
 </script>     
 
-
-
-
 <!-- بوكس الرسائل -->
 <div id="customAlert" style="
 position:fixed;
@@ -1272,4 +1344,19 @@ setInterval(()=>{
 
 });
 </script>
+
+
+<script>
+window.addEventListener("load", ()=>{
+  setTimeout(()=>{
+    document.getElementById("loadingScreen").style.display="none";
+  }, 2000); // مدة الظهور عند فتح التطبيق
+});
+</script>
+
+
+
+<body/>
+
+
   </html>
