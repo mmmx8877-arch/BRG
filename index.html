@@ -465,8 +465,46 @@ color:#000;
 
 
 
+.ramadan-title{
+  display:block;              /* 👈 مهم: يخليها في سطر لوحدها */
+  background: linear-gradient(90deg, #ff8a3d, #ffb26b);
+  color:#000;
+  padding:8px 12px;
+  border-radius:12px;
+  font-weight:900;
+  margin-bottom:6px;
+  font-size:18px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.4);
+  text-align:center;
+}
 
 
+
+
+.tabs-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 10px;
+  flex: 1; /* يخلي التابس ياخد كل المساحة الممكنة */
+}
+
+.scroll-arrow {
+  background: #111;
+  color: #ff8a3d;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  flex-shrink: 0;
+}
 
 
 
@@ -549,7 +587,14 @@ for(let i=0;i<30;i++){
 <div id="welcomeModal">
   <div id="welcomeBox">
     <h2>أهلاً بك في مطعم RBg 🍔</h2>
-    <p>اختر ما تريد من قائمة السندوتشات، البطاطس، الصوصات أو العروض!</p>
+ 
+    <p>
+👌  كل سنه وانتم طيبين وبخير🌜 احلى عروض بدعمكم لينا عملنا لكم عروض ارخص اسعار في مصر🇪🇬
+
+</p>
+
+
+
     <button onclick="closeWelcome()">موافق🤝</button>
   </div>
 </div>
@@ -617,13 +662,20 @@ for(let i=0;i<30;i++){
   
   
   
-  
-  
-  <div class="tabs">
+<div class="tabs-wrapper">
+  <button class="scroll-arrow left" onclick="scrollTabs(-150)">❮</button>
+
+  <div class="tabs" id="tabsContainer">
     <div class="tab active" onclick="setCat('سندوتشات',this)">سندوتشات</div>
     <div class="tab" onclick="setCat('بطاطس',this)">بطاطس</div>
     <div class="tab" onclick="setCat('صوصات',this)">صوصات</div>
-    <div class="tab" onclick="setCat('عروض',this)">العروض</div>
+    <div class="tab" onclick="setCat('عروض',this)">عروض</div>
+    <div class="tab" onclick="setCat('عروض رمضان',this)">عروض رمضان</div>
+    <div class="tab" onclick="setCat('مشروبات',this)">مشروبات 🥤</div>
+  </div>
+
+  <button class="scroll-arrow right" onclick="scrollTabs(150)">❯</button>
+</div>
   </div>
 </header>
 
@@ -959,8 +1011,43 @@ opts:['خس','طماطم','صوص الرانش','الكريمي','صوص الش�
  {id:32,cat:'عروض',name:`الصدمه ٢ 😍\n٢ سنجل دراجون`, s:110,img:'https://i.postimg.cc/2jTrnVgC/1770494500235.png'},
  {id:33,cat:'عروض',name:`الصدمه ٣ 😜\n١ سنجل لحمه F16\n١ سنجل بازوكا`, s:140,img:'https://i.postimg.cc/43hp9Cdy/1770497886419.png'},
  {id:34,cat:'عروض',name:`الصدمه ٤ 🤪\n١ بيف مشروم سنجل\n١ بيف موتزاريلا ستيك سنجل`, s:120,img:'https://i.postimg.cc/PxW31vxx/1770498918156.png'},
- {id:35,cat:'عروض',name:`الصدمه ٥ 🫣\n١ سنجل تشيكن رانش مشوي\n١ سماش سنجل مشروم`, s:150,img:'https://i.postimg.cc/8kFB86Dv/1770499454749.png'}
+ {id:35,cat:'عروض',name:`الصدمه ٥ 🫣\n١ سنجل تشيكن رانش مشوي\n١ سماش سنجل مشروم`, s:150,img:'https://i.postimg.cc/8kFB86Dv/1770499454749.png'},
+
+
+
+// ===== عروض رمضان =====
+{id:36, cat:'عروض رمضان', name:`🌙✨ رمضان كريم ١ ✨🌙\n\n5 كفته + ارز + مخلل + صوص رانش + عيش + بطاطس`, s:85, img:'https://i.postimg.cc/d1TpsbTS/1771367614911.png'},
+
+{id:37, cat:'عروض رمضان', name:`🌙✨ رمضان كريم ٢ ✨🌙\n\nربع فرخه ورك + ارز + مخلل + صوص رانش + عيش + بطاطس`, s:85, img:'https://i.postimg.cc/50MqzTRZ/1771367821743.png'},
+
+{id:38, cat:'عروض رمضان', name:`🌙✨ رمضان كريم ٣ ✨🌙\n\n4 قطع استريبس + ارز + مخلل + صوص رانش + عيش + بطاطس`, s:85, img:'https://i.postimg.cc/SNYd2WBh/1771367939709.png'},
+
+{id:39, cat:'عروض رمضان', name:`🌙✨ رمضان كريم ٤ ✨🌙\n\nربع فرخه ورك + 2 كفته + مخلل + صوص بيج تيستي + عيش + بطاطس`, s:110, img:'https://i.postimg.cc/m2ShDpTV/1771368084238.png'},
+
+{id:40, cat:'عروض رمضان', name:`🌙✨ رمضان كريم ٥ ✨🌙\n\n3 كفته + 3 شيش طاووق + 2 فليه مشوي + ارز + مخلل + صوص رانش + عيش + بطاطس`, s:150, img:'https://i.postimg.cc/02HRc7nq/1771368362754.png'},
+
+{id:41, cat:'عروض رمضان', name:`🌙✨ رمضان كريم ٦ ✨🌙\n\n2 كفته + 2 شيش طاووق + استريبس + 1 فليه مشوي + ارز + مخلل + صوص بيج تيستي + عيش + بطاطس`, s:150, img:'https://i.postimg.cc/bJspzLmq/1771368419136.png'},
+
+{id:42, cat:'عروض رمضان', name:`🌙✨ وجبة عائلية ✨🌙\n\nفرخه كامله مع رز ومخلل وعيش`, s:280, img:'https://i.postimg.cc/t42KYWZ4/1771368511132.png'},
+
+{id:43, cat:'عروض رمضان', name:`🌙✨ كيلو كفته ✨🌙\n\nمع ارز ومخلل وعيش`, s:300, img:'https://i.postimg.cc/gkpQsN8B/1771368606365.png'},
+
+// ===== المشروبات =====
+{id:50, cat:'مشروبات', name:'صوبيا', s:20, img:'https://i.postimg.cc/3wGz96Sq/1771601215225.png'},
+{id:51, cat:'مشروبات', name:'خروب', s:20, img:'https://i.postimg.cc/nhjWcgJY/1771601307091.png'},
+{id:52, cat:'مشروبات', name:'تمر', s:20, img:'https://i.postimg.cc/sxHn39Hm/1771601456922.png'},
+{id:53, cat:'مشروبات', name:'عناب', s:20, img:'https://i.postimg.cc/KY7J1ysB/1771601339807.png'},
+{id:54, cat:'مشروبات', name:'دوم', s:20, img:'https://i.postimg.cc/T2NQL0Q9/1771601375237.png'},
+{id:55, cat:'مشروبات', name:'برتقال', s:20, img:'https://i.postimg.cc/V6LB50Cg/1771601506134.png'},
+{id:56, cat:'مشروبات', name:'بيبسي', s:15, img:'https://i.postimg.cc/pLcnkchk/1771601936058.png'},
+{id:57, cat:'مشروبات', name:'سبرايت', s:15, img:'https://i.postimg.cc/3xqd2yV1/1771601970297.png'},
+{id:58, cat:'مشروبات', name:'فيروز', s:20, img:'https://i.postimg.cc/Cx9xz3fY/1771602018966.png'},
+{id:59, cat:'مشروبات', name:'مياه معدنية', s:10, img:'https://i.postimg.cc/7hXLhbSR/1771602051195.png'},
 ];
+
+
+
+
 
 
 
@@ -1006,6 +1093,16 @@ function toggleOpt(productId, opt){
   else arr.push(opt);
   // ما فيش حاجة تانية نفعلها فوراً؛ الإضافات هتتضاف للنسخة عند الضغط على +
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1182,14 +1279,23 @@ function updateMsgPreview(){
   let msg = 'طلب جديد:\n\n';
 
   // نعرض كل نسخة في الكارت
-  cart.forEach(i=>{
-    const p = items.find(x=>x.id===i.id);
+
+cart.forEach(i=>{
+  const p = items.find(x=>x.id===i.id);
+
+  // سنجل / دبل للسندوتشات فقط
+  if(p.cat === 'سندوتشات'){
     msg += `• ${p.name} (${i.type=='s'?'سنجل':'دبل'}) × ${i.qty}\n`;
-    if(i.opts && i.opts.length){
-      msg += `  إضافات: ${i.opts.join(' - ')}\n`;
-    }
-    msg += `\n`;
-  });
+  }else{
+    msg += `• ${p.name} × ${i.qty}\n`;
+  }
+
+  if(i.opts && i.opts.length){
+    msg += `  إضافات: ${i.opts.join(' - ')}\n`;
+  }
+
+  msg += `\n`;
+});
 
   msg += `الإجمالي: ${total.innerText} جنيه\n`;
   msg += `الاسم: ${nameInput.value.trim() || 'غير محدد'}\n`;
@@ -1308,8 +1414,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
 const images = [
   "https://i.postimg.cc/sDcgNK6M/1770259659861.png",
-  "https://i.postimg.cc/v84TcTXb/1770951165614.png",
-  "https://i.postimg.cc/Prkb2fsC/1770951430879.png"
+  "https://i.postimg.cc/50MqzTRZ/1771367821743.png",
+  "https://i.postimg.cc/d1TpsbTS/1771367614911.png"
 ];
 
 let currentIndex = 0;
@@ -1352,6 +1458,31 @@ window.addEventListener("load", ()=>{
     document.getElementById("loadingScreen").style.display="none";
   }, 2000); // مدة الظهور عند فتح التطبيق
 });
+
+
+
+
+
+
+
+  // دالة تحريك التابس
+  function scrollTabs(amount){
+    document.getElementById("tabsContainer").scrollBy({
+      left: amount,
+      behavior: 'smooth'
+    });
+  }
+
+  // مثال: إذا حبيت تضيف حركة تلقائية أو عند فتح الصفحة
+  // scrollTabs(50); // تحريك 50 بكسل لليمين
+</script>
+
+
+
+
+
+
+
 </script>
 
 
